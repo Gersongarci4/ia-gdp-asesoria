@@ -52,9 +52,15 @@
         }
 
         .logo::before {
-            content: "🤖";
+            content: "";
+            width: 40px;
+            height: 40px;
             margin-right: 10px;
-            font-size: 2rem;
+            background-image: url('logotipo.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: block;
         }
 
         .nav-links {
@@ -281,19 +287,6 @@
             bottom: 0;
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
         }
-
-        .about-overlay {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2;
-            text-align: center;
-            color: white;
-            font-size: 4rem;
-        }
-
-
 
         /* Contact Section */
         .contact {
@@ -534,8 +527,6 @@
         </div>
     </section>
 
-
-
     <!-- About Section -->
     <section id="nosotros" class="about">
         <div class="container">
@@ -547,7 +538,6 @@
                     <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
                 </div>
                 <div class="about-image">
-                    <div class="about-overlay floating">🤖</div>
                 </div>
             </div>
         </div>
@@ -664,8 +654,6 @@
             el.style.transition = 'all 0.8s ease';
             observer.observe(el);
         });
-
-
 
         // Parallax effect for hero section
         window.addEventListener('scroll', function() {
