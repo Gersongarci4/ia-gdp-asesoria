@@ -41,12 +41,21 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
             font-size: 1.8rem;
             font-weight: bold;
             background: linear-gradient(45deg, #fff, #e0e7ff);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+            filter: brightness(0) invert(1);
         }
 
         .nav-links {
@@ -374,7 +383,10 @@
     <!-- Header -->
     <header>
         <nav>
-            <div class="logo">🤖 IA Gdp Asesoría</div>
+            <div class="logo">
+                <img src="logo.png" alt="IA Gdp Asesoría Logo">
+                IA Gdp Asesoría
+            </div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#servicios">Servicios</a></li>
