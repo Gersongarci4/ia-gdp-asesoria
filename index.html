@@ -486,6 +486,86 @@
             animation-delay: 0.4s;
         }
 
+        /* Formulario de captura de leads */
+        .lead-form {
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            padding: 15px;
+            margin-top: 10px;
+            border: 2px solid #667eea;
+        }
+
+        .lead-form h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 12px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .form-button {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #666;
+        }
+
+        .form-button:hover {
+            transform: translateY(-1px);
+        }
+
+        .success-message {
+            background: linear-gradient(45deg, #4CAF50, #45a049);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
         /* Animations */
         @keyframes pulse {
             0% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
@@ -678,48 +758,42 @@
         const ventanaChat = document.getElementById('chatbotWindow');
         const botonChat = document.getElementById('chatbotButton');
         let chatAbierto = false;
+        let datosUsuario = {};
 
         // Base de conocimiento del chatbot
         const respuestasBot = {
             'servicios': {
                 palabrasClave: ['servicio', 'que hacen', 'ofrecen', 'especialidad', 'hacemos'],
                 respuesta: '🎯 Ofrecemos 6 servicios principales:\n\n• Consultoría Estratégica en IA\n• Formación y Capacitación\n• Implementación de Soluciones\n• Análisis de Datos e IA\n• Transformación Digital\n• IA Ética y Segura\n\n¿Te interesa alguno en particular?',
-                opciones: ['Consultoría', 'Formación', 'Implementación', 'Análisis de Datos']
-            },
-            'consultoria': {
-                palabrasClave: ['consultoria', 'estrategia', 'analisis', 'roi', 'negocio'],
-                respuesta: '🎯 Nuestra Consultoría Estratégica incluye:\n\n• Análisis profundo de tu negocio\n• Identificación de oportunidades de IA\n• Estrategias personalizadas\n• Plan de implementación\n• ROI estimado\n\n¿Quieres programar una evaluación gratuita?',
-                opciones: ['Sí, programa evaluación', 'Más información', 'Otros servicios']
-            },
-            'formacion': {
-                palabrasClave: ['formacion', 'capacitacion', 'entrenamient', 'curso', 'aprender'],
-                respuesta: '🧠 Nuestros programas de formación:\n\n• Conceptos básicos de IA\n• Herramientas prácticas\n• Casos de uso reales\n• Certificaciones\n• Modalidad presencial y virtual\n\n¿Para cuántas personas sería la capacitación?',
-                opciones: ['1-5 personas', '6-20 personas', '20+ personas', 'Consultar modalidades']
-            },
-            'implementacion': {
-                palabrasClave: ['implementacion', 'desarrollo', 'chatbot', 'automatizacion', 'sistema'],
-                respuesta: '⚙️ Implementamos soluciones como:\n\n• Chatbots inteligentes\n• Automatización de procesos\n• Análisis predictivo\n• Sistemas personalizados\n• Integración con sistemas existentes\n\n¿Qué tipo de solución necesitas?',
-                opciones: ['Chatbot', 'Automatización', 'Análisis predictivo', 'Personalizada']
-            },
-            'precios': {
-                palabrasClave: ['precio', 'costo', 'cuanto', 'tarifa', 'presupuesto'],
-                respuesta: '💰 Nuestros precios varían según:\n\n• Tipo de servicio\n• Duración del proyecto\n• Complejidad\n• Tamaño de la empresa\n\n🎁 ¡Ofrecemos consulta inicial GRATUITA!\n\n¿Te gustaría agendar una para conocer tu presupuesto específico?',
-                opciones: ['Agendar consulta gratuita', 'Más detalles de precios', 'Comparar servicios']
+                opciones: ['Consultoría', 'Formación', 'Implementación', 'Análisis de Datos'],
+                capturarLead: true
             },
             'consulta': {
-                palabrasClave: ['consulta', 'reunion', 'cita', 'agendar', 'gratuita', 'gratis'],
-                respuesta: '📅 ¡Perfecto! Para agendar tu consulta gratuita necesito:\n\n• Tu nombre\n• Email\n• Empresa\n• Mejor día/hora para contactarte\n• Breve descripción de tu necesidad\n\n¿Podrías proporcionarme esta información?',
-                opciones: ['Enviar por WhatsApp', 'Llamar ahora', 'Email directo']
+                palabrasClave: ['consulta', 'reunion', 'cita', 'agendar', 'gratuita', 'gratis', 'evaluacion'],
+                respuesta: '📅 ¡Perfecto! Me encantaría ayudarte a agendar tu consulta gratuita.\n\nPara conectarte con nuestro equipo y personalizar la propuesta, necesito algunos datos básicos.',
+                opciones: [],
+                capturarLead: true,
+                mostrarFormulario: true
             },
             'contacto': {
                 palabrasClave: ['contacto', 'telefono', 'email', 'direccion', 'ubicacion'],
                 respuesta: '📞 Aquí tienes nuestros datos de contacto:\n\n📧 Email: iagdpasesoria@gmail.com\n📱 WhatsApp: +57 304 292 3988\n📍 Ubicación: Centro Sincelejo - Colombia\n🕒 Horario: Lun-Vie 8:00 AM - 6:00 PM\n\n¿Prefieres que te contactemos por WhatsApp o email?',
-                opciones: ['WhatsApp', 'Email', 'Llamada telefónica']
+                opciones: ['WhatsApp', 'Email', 'Llamada telefónica'],
+                capturarLead: false
             },
             'whatsapp': {
                 palabrasClave: ['whatsapp', 'wa', 'celular', 'mensaje'],
-                respuesta: '📱 ¡Perfecto! Puedes contactarnos directamente por WhatsApp:\n\n**+57 304 292 3988**\n\nEstamos disponibles para:\n• Consultas rápidas\n• Agendar reuniones\n• Envío de propuestas\n• Soporte técnico\n\n¿Prefieres que te enviemos un mensaje primero?',
-                opciones: ['Sí, contáctenme', 'Yo los contacto', 'Más opciones de contacto']
+                respuesta: '📱 ¡Perfecto! Te contactaremos por WhatsApp.\n\nPara enviarte la información más relevante, déjame capturar algunos datos básicos.',
+                opciones: [],
+                capturarLead: true,
+                mostrarFormulario: true
+            },
+            'email': {
+                palabrasClave: ['email', 'correo', 'mail'],
+                respuesta: '📧 ¡Excelente! Te enviaremos la información por email.\n\nPara personalizar nuestra propuesta, necesito algunos datos.',
+                opciones: [],
+                capturarLead: true,
+                mostrarFormulario: true
             }
         };
 
@@ -794,18 +868,227 @@
 
             return mejorCoincidencia || {
                 respuesta: 'Entiendo tu consulta 🤔. Para brindarte la mejor información, ¿podrías ser más específico sobre qué aspecto de nuestros servicios de IA te interesa?\n\nPuedo ayudarte con:\n• Servicios y soluciones\n• Precios y presupuestos\n• Consultas gratuitas\n• Casos de éxito\n• Información de contacto',
-                opciones: ['Servicios', 'Precios', 'Consulta gratuita', 'Contacto']
+                opciones: ['Servicios', 'Precios', 'Consulta gratuita', 'Contacto'],
+                capturarLead: false
             };
         }
 
         function crearOpcionesRapidas(opciones) {
-            if (!opciones) return '';
+            if (!opciones || opciones.length === 0) return '';
             
             const opcionesHTML = opciones.map(opcion => 
                 `<div class="quick-option" onclick="enviarMensajeRapido('${opcion}')">${opcion}</div>`
             ).join('');
             
             return `<div class="quick-options">${opcionesHTML}</div>`;
+        }
+
+        function crearFormularioLead() {
+            return `
+                <div class="lead-form">
+                    <h4>📋 Información de Contacto</h4>
+                    <div class="form-group">
+                        <input type="text" id="nombreLead" placeholder="Tu nombre completo *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="emailLead" placeholder="Tu email *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="tel" id="telefonoLead" placeholder="Tu teléfono/WhatsApp *" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="empresaLead" placeholder="Nombre de tu empresa">
+                    </div>
+                    <div class="form-group">
+                        <select id="servicioLead">
+                            <option value="">Servicio de interés</option>
+                            <option value="consultoria">Consultoría Estratégica</option>
+                            <option value="formacion">Formación y Capacitación</option>
+                            <option value="implementacion">Implementación de Soluciones</option>
+                            <option value="analisis">Análisis de Datos e IA</option>
+                            <option value="transformacion">Transformación Digital</option>
+                            <option value="etica">IA Ética y Segura</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="mensajeLead" placeholder="Cuéntanos brevemente sobre tu proyecto o necesidad..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <select id="contactoPreferido">
+                            <option value="whatsapp">Prefiero WhatsApp</option>
+                            <option value="email">Prefiero Email</option>
+                            <option value="llamada">Prefiero llamada telefónica</option>
+                        </select>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="form-button btn-primary" onclick="enviarLead()">Enviar Información</button>
+                        <button class="form-button btn-secondary" onclick="cancelarFormulario()">Cancelar</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function validarFormulario() {
+            const nombre = document.getElementById('nombreLead')?.value.trim();
+            const email = document.getElementById('emailLead')?.value.trim();
+            const telefono = document.getElementById('telefonoLead')?.value.trim();
+
+            if (!nombre || !email || !telefono) {
+                alert('Por favor completa los campos obligatorios (nombre, email y teléfono)');
+                return false;
+            }
+
+            // Validación básica de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                alert('Por favor ingresa un email válido');
+                return false;
+            }
+
+            return true;
+        }
+
+        function enviarLead() {
+            if (!validarFormulario()) return;
+
+            // Capturar datos del formulario
+            datosUsuario = {
+                nombre: document.getElementById('nombreLead').value.trim(),
+                email: document.getElementById('emailLead').value.trim(),
+                telefono: document.getElementById('telefonoLead').value.trim(),
+                empresa: document.getElementById('empresaLead').value.trim(),
+                servicio: document.getElementById('servicioLead').value,
+                mensaje: document.getElementById('mensajeLead').value.trim(),
+                contactoPreferido: document.getElementById('contactoPreferido').value,
+                fecha: new Date().toLocaleString('es-CO'),
+                origen: 'Chatbot Web'
+            };
+
+            // Mostrar indicador de envío
+            agregarIndicadorEscritura();
+
+            setTimeout(() => {
+                removerIndicadorEscritura();
+                
+                // Enviar por el método preferido
+                if (datosUsuario.contactoPreferido === 'whatsapp') {
+                    enviarPorWhatsApp();
+                } else {
+                    enviarPorEmail();
+                }
+
+                // Mostrar mensaje de éxito
+                const mensajeExito = `
+                    <div class="success-message">
+                        ✅ ¡Información enviada exitosamente!<br>
+                        <strong>${datosUsuario.nombre}</strong>, te contactaremos por ${datosUsuario.contactoPreferido} en las próximas horas.
+                        <br><br>
+                        📱 Si es urgente, puedes escribirnos directamente al WhatsApp: +57 304 292 3988
+                    </div>
+                `;
+                
+                agregarMensaje(mensajeExito);
+                
+                // Opciones post-envío
+                setTimeout(() => {
+                    const opcionesFinales = `
+                        ¿Hay algo más en lo que pueda ayudarte mientras tanto?
+                        <div class="quick-options">
+                            <div class="quick-option" onclick="enviarMensajeRapido('Ver otros servicios')">Otros servicios</div>
+                            <div class="quick-option" onclick="enviarMensajeRapido('¿Cuándo me contactarán?')">Tiempo de respuesta</div>
+                            <div class="quick-option" onclick="enviarMensajeRapido('Gracias, eso es todo')">Terminar chat</div>
+                        </div>
+                    `;
+                    agregarMensaje(opcionesFinales);
+                }, 1000);
+                
+            }, 2000);
+        }
+
+        function enviarPorWhatsApp() {
+            const mensaje = `🤖 *NUEVO LEAD - CHATBOT IA GDP ASESORÍA*
+
+👤 *Datos del Cliente:*
+• Nombre: ${datosUsuario.nombre}
+• Email: ${datosUsuario.email}
+• Teléfono: ${datosUsuario.telefono}
+• Empresa: ${datosUsuario.empresa || 'No especificada'}
+
+🎯 *Interés:*
+• Servicio: ${obtenerNombreServicio(datosUsuario.servicio)}
+• Mensaje: ${datosUsuario.mensaje || 'No especificó detalles adicionales'}
+
+📞 *Contacto preferido:* ${datosUsuario.contactoPreferido}
+📅 *Fecha:* ${datosUsuario.fecha}
+🌐 *Origen:* ${datosUsuario.origen}
+
+---
+*Responder lo antes posible*`;
+
+            // Enviar al WhatsApp de la empresa
+            const numeroWhatsApp = '573042923988'; // Número sin espacios ni símbolos
+            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
+            
+            // Abrir en nueva ventana (para que el chatbot no se interrumpa)
+            window.open(urlWhatsApp, '_blank');
+        }
+
+        function enviarPorEmail() {
+            const asunto = `Nuevo Lead del Chatbot - ${datosUsuario.nombre}`;
+            const cuerpoEmail = `
+NUEVO LEAD DESDE EL CHATBOT
+================================
+
+DATOS DEL CLIENTE:
+------------------
+Nombre: ${datosUsuario.nombre}
+Email: ${datosUsuario.email}
+Teléfono: ${datosUsuario.telefono}
+Empresa: ${datosUsuario.empresa || 'No especificada'}
+
+INFORMACIÓN DEL INTERÉS:
+-----------------------
+Servicio de interés: ${obtenerNombreServicio(datosUsuario.servicio)}
+Mensaje del cliente: ${datosUsuario.mensaje || 'No especificó detalles adicionales'}
+
+PREFERENCIAS DE CONTACTO:
+------------------------
+Método preferido: ${datosUsuario.contactoPreferido}
+
+INFORMACIÓN ADICIONAL:
+---------------------
+Fecha de consulta: ${datosUsuario.fecha}
+Origen: ${datosUsuario.origen}
+
+---
+Este lead se generó automáticamente desde el chatbot del sitio web.
+Responder lo antes posible para mantener el interés del cliente.
+            `;
+
+            // Crear enlace mailto
+            const mailtoLink = `mailto:iagdpasesoria@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoEmail)}`;
+            
+            // Abrir cliente de email
+            window.location.href = mailtoLink;
+        }
+
+        function obtenerNombreServicio(codigo) {
+            const servicios = {
+                'consultoria': 'Consultoría Estratégica en IA',
+                'formacion': 'Formación y Capacitación',
+                'implementacion': 'Implementación de Soluciones',
+                'analisis': 'Análisis de Datos e IA',
+                'transformacion': 'Transformación Digital',
+                'etica': 'IA Ética y Segura'
+            };
+            return servicios[codigo] || 'No especificado';
+        }
+
+        function cancelarFormulario() {
+            const mensajeCancelacion = 'No hay problema 😊. Si cambias de opinión, estaré aquí para ayudarte.\n\n¿Hay algo más sobre nuestros servicios que te gustaría saber?';
+            const opciones = ['Servicios', 'Precios', 'Casos de éxito', 'Contacto'];
+            
+            agregarMensaje(mensajeCancelacion + crearOpcionesRapidas(opciones));
         }
 
         function enviarMensaje() {
@@ -824,7 +1107,14 @@
                 removerIndicadorEscritura();
                 
                 const respuesta = encontrarMejorRespuesta(mensaje);
-                const mensajeBot = respuesta.respuesta + (respuesta.opciones ? crearOpcionesRapidas(respuesta.opciones) : '');
+                let mensajeBot = respuesta.respuesta;
+
+                // Agregar formulario si es necesario
+                if (respuesta.mostrarFormulario) {
+                    mensajeBot += crearFormularioLead();
+                } else if (respuesta.opciones) {
+                    mensajeBot += crearOpcionesRapidas(respuesta.opciones);
+                }
                 
                 agregarMensaje(mensajeBot);
             }, 1500);
@@ -839,7 +1129,14 @@
                 removerIndicadorEscritura();
                 
                 const respuesta = encontrarMejorRespuesta(mensaje);
-                const mensajeBot = respuesta.respuesta + (respuesta.opciones ? crearOpcionesRapidas(respuesta.opciones) : '');
+                let mensajeBot = respuesta.respuesta;
+
+                // Agregar formulario si es necesario
+                if (respuesta.mostrarFormulario) {
+                    mensajeBot += crearFormularioLead();
+                } else if (respuesta.opciones) {
+                    mensajeBot += crearOpcionesRapidas(respuesta.opciones);
+                }
                 
                 agregarMensaje(mensajeBot);
             }, 1000);
@@ -884,4 +1181,28 @@
         }, 10000);
     </script>
 </body>
-</html>
+</html>Lead: false
+            },
+            'consultoria': {
+                palabrasClave: ['consultoria', 'estrategia', 'analisis', 'roi', 'negocio'],
+                respuesta: '🎯 Nuestra Consultoría Estratégica incluye:\n\n• Análisis profundo de tu negocio\n• Identificación de oportunidades de IA\n• Estrategias personalizadas\n• Plan de implementación\n• ROI estimado\n\n¿Quieres programar una evaluación gratuita?',
+                opciones: ['Sí, programa evaluación', 'Más información', 'Otros servicios'],
+                capturarLead: true
+            },
+            'formacion': {
+                palabrasClave: ['formacion', 'capacitacion', 'entrenamient', 'curso', 'aprender'],
+                respuesta: '🧠 Nuestros programas de formación:\n\n• Conceptos básicos de IA\n• Herramientas prácticas\n• Casos de uso reales\n• Certificaciones\n• Modalidad presencial y virtual\n\n¿Para cuántas personas sería la capacitación?',
+                opciones: ['1-5 personas', '6-20 personas', '20+ personas', 'Consultar modalidades'],
+                capturarLead: true
+            },
+            'implementacion': {
+                palabrasClave: ['implementacion', 'desarrollo', 'chatbot', 'automatizacion', 'sistema'],
+                respuesta: '⚙️ Implementamos soluciones como:\n\n• Chatbots inteligentes\n• Automatización de procesos\n• Análisis predictivo\n• Sistemas personalizados\n• Integración con sistemas existentes\n\n¿Qué tipo de solución necesitas?',
+                opciones: ['Chatbot', 'Automatización', 'Análisis predictivo', 'Personalizada'],
+                capturarLead: true
+            },
+            'precios': {
+                palabrasClave: ['precio', 'costo', 'cuanto', 'tarifa', 'presupuesto'],
+                respuesta: '💰 Nuestros precios varían según:\n\n• Tipo de servicio\n• Duración del proyecto\n• Complejidad\n• Tamaño de la empresa\n\n🎁 ¡Ofrecemos consulta inicial GRATUITA!\n\n¿Te gustaría agendar una para conocer tu presupuesto específico?',
+                opciones: ['Agendar consulta gratuita', 'Más detalles de precios', 'Comparar servicios'],
+                capturar
