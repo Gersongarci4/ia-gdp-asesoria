@@ -56,6 +56,11 @@
             width: auto;
             margin-right: 10px;
             filter: brightness(0) invert(1);
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: scale(1.1);
         }
 
         .nav-links {
@@ -384,7 +389,8 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="https://gersongarci4.github.io/ia-gdp-asesoria/logo.png" alt="IA Gdp Asesoría Logo">
+                <img src="https://gersongarci4.github.io/ia-gdp-asesoria/logo.png" alt="IA Gdp Asesoría Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span style="display:none; font-size: 2rem;">🤖</span>
                 IA Gdp Asesoría
             </div>
             <ul class="nav-links">
