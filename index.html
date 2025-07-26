@@ -97,17 +97,6 @@
             align-items: center;
         }
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-            opacity: 0.3;
-        }
-
         .hero-content {
             max-width: 800px;
             margin: 0 auto;
@@ -145,6 +134,8 @@
             transition: all 0.3s ease;
             box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
             animation: fadeInUp 1s ease 0.4s both;
+            cursor: pointer;
+            border: none;
         }
 
         .cta-button:hover {
@@ -188,6 +179,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            padding: 2rem;
         }
 
         .service-card::before {
@@ -203,28 +195,6 @@
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .service-image {
-            width: 100%;
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-
-        .service-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.8), rgba(118, 75, 162, 0.8));
-        }
-
-        .service-content {
-            padding: 2rem;
         }
 
         .service-icon {
@@ -278,110 +248,33 @@
             background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
         }
 
-        .about-image::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.3), rgba(118, 75, 162, 0.3));
-        }
-
         /* Contact Section */
         .contact {
             padding: 80px 0;
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
                         url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
             color: white;
+            text-align: center;
         }
 
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-
-        .contact-form {
+        .chat-cta {
             background: rgba(255,255,255,0.1);
-            padding: 2rem;
+            padding: 3rem;
             border-radius: 20px;
             backdrop-filter: blur(10px);
+            max-width: 600px;
+            margin: 0 auto;
         }
 
-        .form-group {
+        .chat-cta h2 {
+            font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
 
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 12px;
-            border: none;
-            border-radius: 10px;
-            background: rgba(255,255,255,0.9);
-            font-size: 1rem;
-        }
-
-        .form-group textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 12px 30px;
-            border: none;
-            border-radius: 25px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(238, 90, 36, 0.3);
-        }
-
-        .contact-info {
-            background: rgba(255,255,255,0.1);
-            padding: 2rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            padding: 1rem;
-            background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateX(5px);
-        }
-
-        .contact-item i {
-            margin-right: 1rem;
-            font-size: 1.3rem;
+        .chat-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
 
         /* Footer */
@@ -392,16 +285,224 @@
             padding: 2rem 0;
         }
 
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10000;
+        }
+
+        .chatbot-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .chatbot-header h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .close-chat:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .message {
+            max-width: 80%;
+            padding: 0.75rem 1rem;
+            border-radius: 15px;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .message.bot {
+            background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
+            color: #333;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .message.user {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .chatbot-input input:focus {
+            border-color: #667eea;
+        }
+
+        .send-button {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        .quick-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 10px;
+        }
+
+        .quick-option {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            border: 1px solid #667eea;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .quick-option:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
+            border-radius: 15px;
+            border-bottom-left-radius: 5px;
+            max-width: 80%;
+            align-self: flex-start;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #667eea;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
         /* Animations */
+        @keyframes pulse {
+            0% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+            50% { box-shadow: 0 4px 25px rgba(102, 126, 234, 0.6); }
+            100% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
+        }
+
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(15px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
         }
 
         /* Responsive */
@@ -414,8 +515,7 @@
                 font-size: 2.5rem;
             }
 
-            .about-content,
-            .contact-content {
+            .about-content {
                 grid-template-columns: 1fr;
             }
 
@@ -423,25 +523,15 @@
                 grid-template-columns: 1fr;
             }
 
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .chatbot-window {
+                width: 320px;
+                height: 450px;
             }
-        }
 
-        /* Floating elements animation */
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-        }
-
-        /* Parallax effect */
-        .parallax {
-            transform: translateZ(0);
-            will-change: transform;
+            .chatbot-container {
+                bottom: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
@@ -466,7 +556,7 @@
         <div class="hero-content">
             <h1>Transforma tu Negocio con IA</h1>
             <p>Expertos en asesoría y formación en Inteligencia Artificial. Te ayudamos a implementar soluciones innovadoras que impulsen tu empresa al futuro.</p>
-            <a href="#contacto" class="cta-button">Comenzar Ahora</a>
+            <button class="cta-button" onclick="openChatbot()">Habla con nuestro Asistente IA</button>
         </div>
     </section>
 
@@ -475,53 +565,35 @@
         <div class="container">
             <h2 class="section-title">Nuestros Servicios</h2>
             <div class="services-grid">
-                <div class="service-card floating">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                    <div class="service-content">
-                        <div class="service-icon">🎯</div>
-                        <h3>Consultoría Estratégica en IA</h3>
-                        <p>Análisis profundo de tu negocio para identificar oportunidades de implementación de IA. Desarrollamos estrategias personalizadas que maximizan el ROI y optimizan procesos.</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Consultoría Estratégica en IA</h3>
+                    <p>Análisis profundo de tu negocio para identificar oportunidades de implementación de IA. Desarrollamos estrategias personalizadas que maximizan el ROI y optimizan procesos.</p>
                 </div>
-                <div class="service-card floating" style="animation-delay: 1s;">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                    <div class="service-content">
-                        <div class="service-icon">🧠</div>
-                        <h3>Formación y Capacitación</h3>
-                        <p>Programas de entrenamiento completos para equipos y directivos. Desde conceptos básicos hasta implementación avanzada de herramientas de IA.</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Formación y Capacitación</h3>
+                    <p>Programas de entrenamiento completos para equipos y directivos. Desde conceptos básicos hasta implementación avanzada de herramientas de IA.</p>
                 </div>
-                <div class="service-card floating" style="animation-delay: 2s;">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                    <div class="service-content">
-                        <div class="service-icon">⚙️</div>
-                        <h3>Implementación de Soluciones</h3>
-                        <p>Desarrollo e integración de sistemas de IA personalizados. Automatización de procesos, chatbots inteligentes y análisis predictivo.</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Implementación de Soluciones</h3>
+                    <p>Desarrollo e integración de sistemas de IA personalizados. Automatización de procesos, chatbots inteligentes y análisis predictivo.</p>
                 </div>
-                <div class="service-card floating" style="animation-delay: 0.5s;">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                    <div class="service-content">
-                        <div class="service-icon">📊</div>
-                        <h3>Análisis de Datos e IA</h3>
-                        <p>Transformamos tus datos en insights accionables utilizando machine learning y análisis avanzado para la toma de decisiones estratégicas.</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Análisis de Datos e IA</h3>
+                    <p>Transformamos tus datos en insights accionables utilizando machine learning y análisis avanzado para la toma de decisiones estratégicas.</p>
                 </div>
-                <div class="service-card floating" style="animation-delay: 1.5s;">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                    <div class="service-content">
-                        <div class="service-icon">🚀</div>
-                        <h3>Transformación Digital</h3>
-                        <p>Acompañamiento integral en la digitalización de procesos empresariales, integrando IA para optimizar la eficiencia operacional.</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Transformación Digital</h3>
+                    <p>Acompañamiento integral en la digitalización de procesos empresariales, integrando IA para optimizar la eficiencia operacional.</p>
                 </div>
-                <div class="service-card floating" style="animation-delay: 2.5s;">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1563206767-5b18f218e8de?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"></div>
-                    <div class="service-content">
-                        <div class="service-icon">🛡️</div>
-                        <h3>IA Ética y Segura</h3>
-                        <p>Implementación responsable de IA con enfoque en privacidad, seguridad de datos y cumplimiento de regulaciones internacionales.</p>
-                    </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>IA Ética y Segura</h3>
+                    <p>Implementación responsable de IA con enfoque en privacidad, seguridad de datos y cumplimiento de regulaciones internacionales.</p>
                 </div>
             </div>
         </div>
@@ -537,8 +609,7 @@
                     <p>Nuestro enfoque único combina conocimiento técnico profundo con una comprensión clara de las necesidades empresariales, garantizando soluciones que no solo son innovadoras, sino también prácticas y rentables.</p>
                     <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
                 </div>
-                <div class="about-image">
-                </div>
+                <div class="about-image"></div>
             </div>
         </div>
     </section>
@@ -546,48 +617,13 @@
     <!-- Contact Section -->
     <section id="contacto" class="contact">
         <div class="container">
-            <h2 class="section-title">Contacta con Nosotros</h2>
-            <div class="contact-content">
-                <div class="contact-form">
-                    <h3>Solicita una Consulta Gratuita</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="nombre">Nombre Completo</label>
-                            <input type="text" id="nombre" name="nombre" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="empresa">Empresa</label>
-                            <input type="text" id="empresa" name="empresa">
-                        </div>
-                        <div class="form-group">
-                            <label for="mensaje">¿Cómo podemos ayudarte?</label>
-                            <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto o necesidades de IA..."></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Enviar Consulta</button>
-                    </form>
-                </div>
-                <div class="contact-info">
-                    <h3>Información de Contacto</h3>
-                    <div class="contact-item">
-                        <span>📧</span>
-                        <span>iagdpasesoria@gmail.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📱</span>
-                        <span>+57 304 292 3988</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>📍</span>
-                        <span>Centro Sincelejo - Colombia</span>
-                    </div>
-                    <div class="contact-item">
-                        <span>🕒</span>
-                        <span>Lun - Vie: 8:00 AM - 6:00 PM</span>
-                    </div>
+            <div class="chat-cta">
+                <h2>🤖 Habla con Nuestro Asistente IA</h2>
+                <p>¿Listo para transformar tu negocio? Nuestro asistente inteligente está disponible 24/7 para responder tus preguntas y programar una consulta gratuita.</p>
+                <button class="cta-button" onclick="openChatbot()">Iniciar Conversación</button>
+                <div style="margin-top: 2rem; opacity: 0.8;">
+                    <p>📧 iagdpasesoria@gmail.com | 📱 +57 304 292 3988</p>
+                    <p>📍 Centro Sincelejo - Colombia</p>
                 </div>
             </div>
         </div>
@@ -600,7 +636,260 @@
         </div>
     </footer>
 
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <button class="chatbot-button" id="chatbotButton" onclick="toggleChatbot()">
+            🤖
+        </button>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>🤖 Asistente IA Gdp</h3>
+                <button class="close-chat" onclick="closeChatbot()">×</button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatMessages">
+                <div class="message bot">
+                    ¡Hola! 👋 Soy el asistente de IA Gdp Asesoría. Estoy aquí para ayudarte con cualquier pregunta sobre nuestros servicios de Inteligencia Artificial.
+                    <div class="quick-options">
+                        <div class="quick-option" onclick="sendQuickMessage('¿Qué servicios ofrecen?')">Servicios</div>
+                        <div class="quick-option" onclick="sendQuickMessage('Quiero una consulta gratuita')">Consulta Gratuita</div>
+                        <div class="quick-option" onclick="sendQuickMessage('¿Cuáles son sus precios?')">Precios</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." maxlength="500">
+                <button class="send-button" onclick="sendMessage()">📤</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // Chatbot functionality
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        let isOpen = false;
+
+        // Bot responses database
+        const botResponses = {
+            'servicios': {
+                keywords: ['servicio', 'que hacen', 'ofrecen', 'especialidad'],
+                response: '🎯 Ofrecemos 6 servicios principales:\n\n• Consultoría Estratégica en IA\n• Formación y Capacitación\n• Implementación de Soluciones\n• Análisis de Datos e IA\n• Transformación Digital\n• IA Ética y Segura\n\n¿Te interesa alguno en particular?',
+                options: ['Consultoría', 'Formación', 'Implementación', 'Análisis de Datos']
+            },
+            'consultoria': {
+                keywords: ['consultoria', 'estrategia', 'analisis', 'roi'],
+                response: '🎯 Nuestra Consultoría Estratégica incluye:\n\n• Análisis profundo de tu negocio\n• Identificación de oportunidades de IA\n• Estrategias personalizadas\n• Plan de implementación\n• ROI estimado\n\n¿Quieres programar una evaluación gratuita?',
+                options: ['Sí, programa evaluación', 'Más información', 'Otros servicios']
+            },
+            'formacion': {
+                keywords: ['formacion', 'capacitacion', 'entrenamient', 'curso', 'aprender'],
+                response: '🧠 Nuestros programas de formación:\n\n• Conceptos básicos de IA\n• Herramientas prácticas\n• Casos de uso reales\n• Certificaciones\n• Modalidad presencial y virtual\n\n¿Para cuántas personas sería la capacitación?',
+                options: ['1-5 personas', '6-20 personas', '20+ personas', 'Consultar modalidades']
+            },
+            'implementacion': {
+                keywords: ['implementacion', 'desarrollo', 'chatbot', 'automatizacion', 'sistema'],
+                response: '⚙️ Implementamos soluciones como:\n\n• Chatbots inteligentes\n• Automatización de procesos\n• Análisis predictivo\n• Sistemas personalizados\n• Integración con sistemas existentes\n\n¿Qué tipo de solución necesitas?',
+                options: ['Chatbot', 'Automatización', 'Análisis predictivo', 'Personalizada']
+            },
+            'precios': {
+                keywords: ['precio', 'costo', 'cuanto', 'tarifa', 'presupuesto'],
+                response: '💰 Nuestros precios varían según:\n\n• Tipo de servicio\n• Duración del proyecto\n• Complejidad\n• Tamaño de la empresa\n\n🎁 ¡Ofrecemos consulta inicial GRATUITA!\n\n¿Te gustaría agendar una para conocer tu presupuesto específico?',
+                options: ['Agendar consulta gratuita', 'Más detalles de precios', 'Comparar servicios']
+            },
+            'consulta': {
+                keywords: ['consulta', 'reunion', 'cita', 'agendar', 'gratuita', 'gratis'],
+                response: '📅 ¡Perfecto! Para agendar tu consulta gratuita necesito:\n\n• Tu nombre\n• Email\n• Empresa\n• Mejor día/hora para contactarte\n• Breve descripción de tu necesidad\n\n¿Podrías proporcionarme esta información?',
+                options: ['Enviar por WhatsApp', 'Llamar ahora', 'Email directo']
+            },
+            'contacto': {
+                keywords: ['contacto', 'telefono', 'email', 'direccion', 'ubicacion'],
+                response: '📞 Aquí tienes nuestros datos de contacto:\n\n📧 Email: iagdpasesoria@gmail.com\n📱 WhatsApp: +57 304 292 3988\n📍 Ubicación: Centro Sincelejo - Colombia\n🕒 Horario: Lun-Vie 8:00 AM - 6:00 PM\n\n¿Prefieres que te contactemos por WhatsApp o email?',
+                options: ['WhatsApp', 'Email', 'Llamada telefónica']
+            },
+            'tiempo': {
+                keywords: ['cuando', 'cuanto tiempo', 'duracion', 'plazo'],
+                response: '⏱️ Los tiempos varían por proyecto:\n\n• Consultoría inicial: 1-2 semanas\n• Formación básica: 2-4 semanas\n• Implementación simple: 1-3 meses\n• Proyectos complejos: 3-6 meses\n\n¿Tienes algún plazo específico en mente?',
+                options: ['Necesito algo urgente', 'Tengo flexibilidad', 'Depende del proyecto']
+            },
+            'experiencia': {
+                keywords: ['experiencia', 'casos', 'clientes', 'resultados', 'referencias'],
+                response: '🏆 Nuestra experiencia incluye:\n\n• +50 proyectos de IA implementados\n• Clientes en retail, salud, finanzas\n• ROI promedio del 300%\n• 95% de satisfacción del cliente\n• Certificaciones internacionales\n\n¿Te gustaría ver algunos casos de éxito específicos?',
+                options: ['Ver casos de éxito', 'Referencias de clientes', 'Certificaciones']
+            }
+        };
+
+        function toggleChatbot() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            isOpen = !isOpen;
+            
+            if (isOpen) {
+                chatWindow.style.display = 'flex';
+                document.getElementById('chatbotButton').innerHTML = '💬';
+                messageInput.focus();
+            } else {
+                chatWindow.style.display = 'none';
+                document.getElementById('chatbotButton').innerHTML = '🤖';
+            }
+        }
+
+        function openChatbot() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatWindow.style.display = 'flex';
+            document.getElementById('chatbotButton').innerHTML = '💬';
+            isOpen = true;
+            messageInput.focus();
+        }
+
+        function closeChatbot() {
+            const chatWindow = document.getElementById('chatbotWindow');
+            chatWindow.style.display = 'none';
+            document.getElementById('chatbotButton').innerHTML = '🤖';
+            isOpen = false;
+        }
+
+        function addMessage(message, isUser = false) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+            messageDiv.innerHTML = message;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function addTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typing';
+            typingDiv.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const typing = document.getElementById('typing');
+            if (typing) {
+                typing.remove();
+            }
+        }
+
+        function findBestResponse(userMessage) {
+            const message = userMessage.toLowerCase();
+            let bestMatch = null;
+            let maxScore = 0;
+
+            for (const [key, response] of Object.entries(botResponses)) {
+                let score = 0;
+                for (const keyword of response.keywords) {
+                    if (message.includes(keyword)) {
+                        score += keyword.length;
+                    }
+                }
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestMatch = response;
+                }
+            }
+
+            return bestMatch || {
+                response: 'Entiendo tu consulta 🤔. Para brindarte la mejor información, ¿podrías ser más específico sobre qué aspecto de nuestros servicios de IA te interesa?\n\nPuedo ayudarte con:\n• Servicios y soluciones\n• Precios y presupuestos\n• Consultas gratuitas\n• Casos de éxito\n• Información de contacto',
+                options: ['Servicios', 'Precios', 'Consulta gratuita', 'Contacto']
+            };
+        }
+
+        function createQuickOptions(options) {
+            if (!options) return '';
+            
+            const optionsHTML = options.map(option => 
+                `<div class="quick-option" onclick="sendQuickMessage('${option}')">${option}</div>`
+            ).join('');
+            
+            return `<div class="quick-options">${optionsHTML}</div>`;
+        }
+
+        function sendMessage() {
+            const message = messageInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, true);
+            messageInput.value = '';
+
+            // Show typing indicator
+            addTypingIndicator();
+
+            // Simulate thinking time
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                const response = findBestResponse(message);
+                const botMessage = response.response + (response.options ? createQuickOptions(response.options) : '');
+                
+                addMessage(botMessage);
+            }, 1500);
+        }
+
+        function sendQuickMessage(message) {
+            addMessage(message, true);
+            
+            addTypingIndicator();
+            
+            setTimeout(() => {
+                removeTypingIndicator();
+                
+                const response = findBestResponse(message);
+                const botMessage = response.response + (response.options ? createQuickOptions(response.options) : '');
+                
+                addMessage(botMessage);
+            }, 1000);
+        }
+
+        // Enhanced bot responses with more specific Colombian context
+        botResponses.colombia = {
+            keywords: ['colombia', 'sincelejo', 'sucre', 'caribe', 'local'],
+            response: '🇨🇴 Estamos orgullosos de ser una empresa colombiana ubicada en Sincelejo, Sucre. Conocemos las necesidades específicas del mercado colombiano y latinoamericano.\n\n• Experiencia en el mercado local\n• Entendimiento cultural\n• Precios competitivos en pesos colombianos\n• Soporte en español\n\n¿Te gustaría conocer casos de éxito en Colombia?',
+            options: ['Casos colombianos', 'Precios en COP', 'Soporte local']
+        };
+
+        botResponses.whatsapp = {
+            keywords: ['whatsapp', 'wa', 'celular', 'mensaje'],
+            response: '📱 ¡Perfecto! Puedes contactarnos directamente por WhatsApp:\n\n**+57 304 292 3988**\n\nEstamos disponibles para:\n• Consultas rápidas\n• Agendar reuniones\n• Envío de propuestas\n• Soporte técnico\n\n¿Prefieres que te enviemos un mensaje primero?',
+            options: ['Sí, contáctenme', 'Yo los contacto', 'Más opciones de contacto']
+        };
+
+        botResponses.industrias = {
+            keywords: ['industria', 'sector', 'rubro', 'tipo empresa', 'negocio'],
+            response: '🏭 Trabajamos con diversas industrias:\n\n• **Retail y E-commerce**: Recomendaciones personalizadas\n• **Salud**: Diagnóstico asistido y gestión\n• **Finanzas**: Detección de fraudes y análisis\n• **Manufactura**: Mantenimiento predictivo\n• **Educación**: Plataformas adaptativas\n• **Agricultura**: Agricultura de precisión\n\n¿Tu empresa pertenece a alguna de estas industrias?',
+            options: ['Retail', 'Salud', 'Finanzas', 'Otra industria']
+        };
+
+        botResponses.urgente = {
+            keywords: ['urgente', 'rapido', 'ya', 'inmediato', 'pronto'],
+            response: '⚡ Entendemos que tienes necesidades urgentes. Nuestro proceso express:\n\n• **Consulta inmediata**: Mismo día\n• **Propuesta rápida**: 24-48 horas\n• **Inicio proyecto**: 1 semana\n• **Soluciones MVP**: 2-4 semanas\n\n📞 Para casos urgentes, llámanos directamente: +57 304 292 3988',
+            options: ['Llamar ahora', 'WhatsApp urgente', 'Agendar hoy mismo']
+        };
+
+        botResponses.equipo = {
+            keywords: ['equipo', 'quien', 'personas', 'staff', 'profesionales'],
+            response: '👥 Nuestro equipo está conformado por:\n\n• **Ingenieros en IA y ML**: Desarrollo técnico\n• **Consultores de negocio**: Estrategia empresarial\n• **Data Scientists**: Análisis de datos\n• **UX/UI Designers**: Experiencia de usuario\n• **Project Managers**: Gestión de proyectos\n\nTodos con certificaciones internacionales y experiencia comprobada.',
+            options: ['Ver certificaciones', 'Casos de éxito', 'Conocer metodología']
+        };
+
+        // Enter key functionality
+        messageInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Auto-open chatbot after 10 seconds (optional)
+        setTimeout(() => {
+            if (!isOpen) {
+                document.getElementById('chatbotButton').style.animation = 'pulse 1s ease-in-out 3';
+            }
+        }, 10000);
+
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -615,13 +904,6 @@
             });
         });
 
-        // Form submission handler
-        document.querySelector('form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('¡Gracias por tu consulta! Nos pondremos en contacto contigo pronto.');
-            this.reset();
-        });
-
         // Add scroll effect to header
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
@@ -632,39 +914,21 @@
             }
         });
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Welcome message variations
+        const welcomeMessages = [
+            "¡Hola! 👋 Soy el asistente de IA Gdp Asesoría. ¿En qué puedo ayudarte hoy?",
+            "¡Bienvenido! 🤖 Estoy aquí para resolver tus dudas sobre nuestros servicios de IA.",
+            "¡Hola! 🚀 ¿Listo para transformar tu negocio con Inteligencia Artificial?"
+        ];
 
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe all service cards and sections
-        document.querySelectorAll('.service-card, .about-content, .contact-content').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.8s ease';
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero section
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelector('.hero');
-            const speed = scrolled * 0.5;
-            
-            if (parallax) {
-                parallax.style.transform = `translateY(${speed}px)`;
+        // Initialize chatbot with random welcome message
+        function initializeChatbot() {
+            const randomWelcome = welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)];
+            const firstMessage = document.querySelector('.message.bot');
+            if (firstMessage) {
+                firstMessage.innerHTML = randomWelcome + createQuickOptions(['Servicios', 'Consulta Gratuita', 'Precios', 'Contacto']);
             }
-        });
-    </script>
-</body>
-</html>
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializeChatbot)
