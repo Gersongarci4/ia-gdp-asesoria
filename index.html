@@ -2,10 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Gdp Asesoría - Expertos en Inteligencia Artificial</title>
-    <!-- Landbot Script -->
-    <script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
     <style>
         * {
             margin: 0;
@@ -138,21 +136,11 @@
             animation: fadeInUp 1s ease 0.4s both;
             cursor: pointer;
             border: none;
-            margin: 0 10px;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(238, 90, 36, 0.4);
-        }
-
-        .cta-button.secondary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .cta-button.secondary:hover {
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         }
 
         /* Services Section */
@@ -309,41 +297,6 @@
             }
         }
 
-        /* Chatbot Button Styles */
-        .chatbot-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1001;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: white;
-        }
-
-        .chatbot-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        .chatbot-button:active {
-            transform: scale(0.95);
-        }
-
-        /* Hidden state for website content */
-        .website-content.hidden {
-            display: none;
-        }
-
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -361,324 +314,110 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
-
-            .chatbot-button {
-                bottom: 20px;
-                right: 20px;
-                width: 55px;
-                height: 55px;
-                font-size: 22px;
-            }
-
-            .cta-button {
-                display: block;
-                margin: 10px auto;
-                width: fit-content;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="website-content" id="website-content">
-        <!-- Header -->
-        <header>
-            <nav>
-                <div class="logo">
-                    IA Gdp Asesoría
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </nav>
-        </header>
-
-        <!-- Hero Section -->
-        <section id="inicio" class="hero">
-            <div class="hero-content">
-                <h1>Transforma tu Negocio con IA</h1>
-                <p>Expertos en asesoría y formación en Inteligencia Artificial. Te ayudamos a implementar soluciones innovadoras que impulsen tu empresa al futuro.</p>
-                <a href="#contacto" class="cta-button">Contáctanos</a>
-                <button onclick="openFullpageChatbot()" class="cta-button secondary">💬 Habla con IA</button>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                IA Gdp Asesoría
             </div>
-        </section>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#nosotros">Nosotros</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <!-- Services Section -->
-        <section id="servicios" class="services">
-            <div class="container">
-                <h2 class="section-title">Nuestros Servicios</h2>
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">🎯</div>
-                        <h3>Consultoría Estratégica en IA</h3>
-                        <p>Análisis profundo de tu negocio para identificar oportunidades de implementación de IA. Desarrollamos estrategias personalizadas que maximizan el ROI y optimizan procesos.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🧠</div>
-                        <h3>Formación y Capacitación</h3>
-                        <p>Programas de entrenamiento completos para equipos y directivos. Desde conceptos básicos hasta implementación avanzada de herramientas de IA.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">⚙️</div>
-                        <h3>Implementación de Soluciones</h3>
-                        <p>Desarrollo e integración de sistemas de IA personalizados. Automatización de procesos, chatbots inteligentes y análisis predictivo.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">📊</div>
-                        <h3>Análisis de Datos e IA</h3>
-                        <p>Transformamos tus datos en insights accionables utilizando machine learning y análisis avanzado para la toma de decisiones estratégicas.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🚀</div>
-                        <h3>Transformación Digital</h3>
-                        <p>Acompañamiento integral en la digitalización de procesos empresariales, integrando IA para optimizar la eficiencia operacional.</p>
-                    </div>
-                    <div class="service-card">
-                        <div class="service-icon">🛡️</div>
-                        <h3>IA Ética y Segura</h3>
-                        <p>Implementación responsable de IA con enfoque en privacidad, seguridad de datos y cumplimiento de regulaciones internacionales.</p>
-                    </div>
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-content">
+            <h1>Transforma tu Negocio con IA</h1>
+            <p>Expertos en asesoría y formación en Inteligencia Artificial. Te ayudamos a implementar soluciones innovadoras que impulsen tu empresa al futuro.</p>
+            <a href="#contacto" class="cta-button">Contáctanos</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="services">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🎯</div>
+                    <h3>Consultoría Estratégica en IA</h3>
+                    <p>Análisis profundo de tu negocio para identificar oportunidades de implementación de IA. Desarrollamos estrategias personalizadas que maximizan el ROI y optimizan procesos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Formación y Capacitación</h3>
+                    <p>Programas de entrenamiento completos para equipos y directivos. Desde conceptos básicos hasta implementación avanzada de herramientas de IA.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Implementación de Soluciones</h3>
+                    <p>Desarrollo e integración de sistemas de IA personalizados. Automatización de procesos, chatbots inteligentes y análisis predictivo.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Análisis de Datos e IA</h3>
+                    <p>Transformamos tus datos en insights accionables utilizando machine learning y análisis avanzado para la toma de decisiones estratégicas.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Transformación Digital</h3>
+                    <p>Acompañamiento integral en la digitalización de procesos empresariales, integrando IA para optimizar la eficiencia operacional.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>IA Ética y Segura</h3>
+                    <p>Implementación responsable de IA con enfoque en privacidad, seguridad de datos y cumplimiento de regulaciones internacionales.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- About Section -->
-        <section id="nosotros" class="about">
-            <div class="container">
-                <div class="about-content">
-                    <div class="about-text">
-                        <h2>¿Por qué elegir IA Gdp Asesoría?</h2>
-                        <p>Somos un equipo de expertos especializados en Inteligencia Artificial y transformación digital, con años de experiencia ayudando a empresas de todos los tamaños a aprovechar el poder de la IA.</p>
-                        <p>Nuestro enfoque único combina conocimiento técnico profundo con una comprensión clara de las necesidades empresariales, garantizando soluciones que no solo son innovadoras, sino también prácticas y rentables.</p>
-                        <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
-                    </div>
-                    <div class="about-image"></div>
+    <!-- About Section -->
+    <section id="nosotros" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>¿Por qué elegir IA Gdp Asesoría?</h2>
+                    <p>Somos un equipo de expertos especializados en Inteligencia Artificial y transformación digital, con años de experiencia ayudando a empresas de todos los tamaños a aprovechar el poder de la IA.</p>
+                    <p>Nuestro enfoque único combina conocimiento técnico profundo con una comprensión clara de las necesidades empresariales, garantizando soluciones que no solo son innovadoras, sino también prácticas y rentables.</p>
+                    <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
+                </div>
+                <div class="about-image"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="contact">
+        <div class="container">
+            <div class="contact-cta">
+                <h2>💼 Contacta con Nosotros</h2>
+                <p>¿Listo para transformar tu negocio? Estamos disponibles para responder tus preguntas y programar una consulta gratuita.</p>
+                <div style="margin-top: 2rem; opacity: 0.9;">
+                    <p>📧 iagdpasesoria@gmail.com | 📱 +57 304 292 3988</p>
+                    <p>📍 Centro Sincelejo - Colombia</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Contact Section -->
-        <section id="contacto" class="contact">
-            <div class="container">
-                <div class="contact-cta">
-                    <h2>💼 Contacta con Nosotros</h2>
-                    <p>¿Listo para transformar tu negocio? Estamos disponibles para responder tus preguntas y programar una consulta gratuita.</p>
-                    <div style="margin-top: 2rem; opacity: 0.9;">
-                        <p>📧 iagdpasesoria@gmail.com | 📱 +57 304 292 3988</p>
-                        <p>📍 Centro Sincelejo - Colombia</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 IA Gdp Asesoría. Todos los derechos reservados. | Transformando el futuro con Inteligencia Artificial</p>
+        </div>
+    </footer>
 
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <p>&copy; 2025 IA Gdp Asesoría. Todos los derechos reservados. | Transformando el futuro con Inteligencia Artificial</p>
-            </div>
-        </footer>
-
-        <!-- Chatbot Button -->
-        <button class="chatbot-button" onclick="openFloatingChatbot()" title="Habla con nuestro asistente IA">
-            💬
-        </button>
-    </div>
-
-    <script type="module">
-        // Variables globales
-        let myFloatingLandbot = null;
-        let myFullpageLandbot = null;
-        let chatbotOpen = false;
-        let fullpageMode = false;
-
-        // Función para abrir chatbot en pantalla completa
-        window.openFullpageChatbot = function() {
-            if (!fullpageMode) {
-                // Ocultar contenido del sitio web
-                document.getElementById('website-content').classList.add('hidden');
-                
-                // Inicializar chatbot en pantalla completa
-                if (!myFullpageLandbot) {
-                    myFullpageLandbot = new Landbot.Fullpage({
-                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
-                    });
-                }
-                
-                fullpageMode = true;
-                
-                // Agregar botón para volver al sitio web
-                setTimeout(() => {
-                    const backButton = document.createElement('button');
-                    backButton.innerHTML = '← Volver al sitio';
-                    backButton.style.cssText = `
-                        position: fixed;
-                        top: 20px;
-                        left: 20px;
-                        background: linear-gradient(45deg, #667eea, #764ba2);
-                        color: white;
-                        border: none;
-                        padding: 10px 20px;
-                        border-radius: 25px;
-                        cursor: pointer;
-                        z-index: 10000;
-                        font-weight: bold;
-                        font-size: 14px;
-                        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-                        transition: all 0.3s ease;
-                    `;
-                    backButton.onmouseover = () => {
-                        backButton.style.transform = 'translateY(-2px)';
-                        backButton.style.boxShadow = '0 6px 20px rgba(0,0,0,0.3)';
-                    };
-                    backButton.onmouseout = () => {
-                        backButton.style.transform = 'translateY(0)';
-                        backButton.style.boxShadow = '0 4px 15px rgba(0,0,0,0.2)';
-                    };
-                    backButton.onclick = closeFullpageChatbot;
-                    document.body.appendChild(backButton);
-                }, 1000);
-            }
-        };
-
-        // Función para cerrar chatbot en pantalla completa
-        window.closeFullpageChatbot = function() {
-            if (fullpageMode) {
-                // Destruir chatbot de pantalla completa
-                if (myFullpageLandbot) {
-                    myFullpageLandbot.destroy();
-                    myFullpageLandbot = null;
-                }
-                
-                // Remover botón de volver
-                const backButton = document.querySelector('button[onclick="closeFullpageChatbot()"]');
-                if (backButton) {
-                    backButton.remove();
-                }
-                
-                // Mostrar contenido del sitio web
-                document.getElementById('website-content').classList.remove('hidden');
-                fullpageMode = false;
-            }
-        };
-
-        // Función para abrir chatbot flotante
-        window.openFloatingChatbot = function() {
-            if (!chatbotOpen && !fullpageMode) {
-                // Crear contenedor del chatbot si no existe
-                if (!document.getElementById('chatbot-container')) {
-                    const chatbotContainer = document.createElement('div');
-                    chatbotContainer.id = 'chatbot-container';
-                    chatbotContainer.style.cssText = `
-                        position: fixed;
-                        bottom: 100px;
-                        right: 30px;
-                        width: 400px;
-                        height: 600px;
-                        z-index: 1000;
-                        border-radius: 15px;
-                        overflow: hidden;
-                        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-                        background: white;
-                        transition: all 0.3s ease;
-                        transform: scale(0.8) translateY(20px);
-                        opacity: 0;
-                    `;
-                    document.body.appendChild(chatbotContainer);
-
-                    // Crear botón de cerrar
-                    const closeButton = document.createElement('button');
-                    closeButton.innerHTML = '✕';
-                    closeButton.style.cssText = `
-                        position: absolute;
-                        top: 10px;
-                        right: 10px;
-                        background: rgba(0,0,0,0.1);
-                        border: none;
-                        border-radius: 50%;
-                        width: 30px;
-                        height: 30px;
-                        cursor: pointer;
-                        z-index: 1001;
-                        color: #666;
-                        font-size: 16px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        transition: all 0.2s ease;
-                    `;
-                    closeButton.onmouseover = () => {
-                        closeButton.style.background = 'rgba(0,0,0,0.2)';
-                    };
-                    closeButton.onmouseout = () => {
-                        closeButton.style.background = 'rgba(0,0,0,0.1)';
-                    };
-                    closeButton.onclick = closeFloatingChatbot;
-                    chatbotContainer.appendChild(closeButton);
-
-                    // Ajustar para móviles
-                    if (window.innerWidth <= 768) {
-                        chatbotContainer.style.cssText = `
-                            position: fixed;
-                            top: 0;
-                            left: 0;
-                            width: 100vw;
-                            height: 100vh;
-                            z-index: 1000;
-                            border-radius: 0;
-                            overflow: hidden;
-                            box-shadow: none;
-                            background: white;
-                            transition: all 0.3s ease;
-                            transform: translateY(100%);
-                            opacity: 1;
-                        `;
-                    }
-                }
-
-                // Inicializar y mostrar el chatbot
-                if (!myFloatingLandbot) {
-                    myFloatingLandbot = new Landbot.Container({
-                        container: '#chatbot-container',
-                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
-                    });
-                }
-                
-                const container = document.getElementById('chatbot-container');
-                
-                setTimeout(() => {
-                    if (window.innerWidth <= 768) {
-                        container.style.transform = 'translateY(0)';
-                    } else {
-                        container.style.transform = 'scale(1) translateY(0)';
-                        container.style.opacity = '1';
-                    }
-                }, 100);
-
-                chatbotOpen = true;
-            }
-        };
-
-        // Función para cerrar chatbot flotante
-        window.closeFloatingChatbot = function() {
-            const container = document.getElementById('chatbot-container');
-            if (container) {
-                if (window.innerWidth <= 768) {
-                    container.style.transform = 'translateY(100%)';
-                } else {
-                    container.style.transform = 'scale(0.8) translateY(20px)';
-                    container.style.opacity = '0';
-                }
-                
-                setTimeout(() => {
-                    container.remove();
-                    chatbotOpen = false;
-                    myFloatingLandbot = null;
-                }, 300);
-            }
-        };
-
+    <script>
         // Navegación suave
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -696,23 +435,79 @@
         // Efecto de scroll en header
         window.addEventListener('scroll', function() {
             const header = document.querySelector('header');
-            if (header && window.scrollY > 100) {
+            if (window.scrollY > 100) {
                 header.style.background = 'rgba(102, 126, 234, 0.95)';
-            } else if (header) {
+            } else {
                 header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            }
-        });
-
-        // Cerrar chatbot con tecla Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                if (fullpageMode) {
-                    closeFullpageChatbot();
-                } else if (chatbotOpen) {
-                    closeFloatingChatbot();
-                }
             }
         });
     </script>
 </body>
 </html>
+
+<script>
+window.addEventListener('mouseover', initLandbot, { once: true });
+window.addEventListener('touchstart', initLandbot, { once: true });
+var myLandbot;
+function initLandbot() {
+  if (!myLandbot) {
+    var s = document.createElement('script');
+    s.type = "module"
+    s.async = true;
+    s.addEventListener('load', function() {
+      var myLandbot = new Landbot.Livechat({
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
+      });
+    });
+    s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  }
+}
+</script>
+
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Landbot | Convert a Landing Page into a Chatbot</title>
+  </head>
+  <body>
+    <script SameSite="None; Secure"  type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
+    <script type="module">
+      var myLandbot = new Landbot.Fullpage({
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
+      });
+    </script>
+  </body>
+</html>
+
+<script SameSite="None; Secure"  type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
+<div id="myLandbot" style="width: 100%; height: nullpx"></div>
+<script type="module">
+  var myLandbot = new Landbot.Container({
+    container: '#myLandbot',
+    configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
+  });
+</script>
+
+<script>
+window.addEventListener('mouseover', initLandbot, { once: true });
+window.addEventListener('touchstart', initLandbot, { once: true });
+var myLandbot;
+function initLandbot() {
+  if (!myLandbot) {
+    var s = document.createElement('script');
+    s.type = "module"
+    s.async = true;
+    s.addEventListener('load', function() {
+      myLandbot = new Landbot.Popup({
+        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
+      });
+    });
+    s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+    var x = document.getElementsByTagName('script')[0];
+    x.parentNode.insertBefore(s, x);
+  }
+}
+</script>
