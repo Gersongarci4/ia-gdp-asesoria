@@ -1,518 +1,82 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IA Gdp Asesoría - Expertos en Inteligencia Artificial</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IA Gdp Asesoría</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            overflow-x: hidden;
-        }
+    header {
+      background-color: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      border-radius: 10px;
+    }
 
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
+    main {
+      margin-top: 20px;
+    }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 1.8rem;
-            font-weight: bold;
-            background: linear-gradient(45deg, #fff, #e0e7ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .logo::before {
-            content: "";
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            background-image: url('logotipo.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            display: block;
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-        }
-
-        .nav-links a:hover {
-            background: rgba(255,255,255,0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
-                        url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            color: white;
-            padding: 120px 0 80px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #e0e7ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: fadeInUp 1s ease;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
-            animation: fadeInUp 1s ease 0.4s both;
-            cursor: pointer;
-            border: none;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.4);
-        }
-
-        /* Chat Button */
-        .chat-button {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            font-size: 24px;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s ease;
-            z-index: 1001;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .chat-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 80px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #333;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            padding: 2rem;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-
-        .service-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        /* About Section */
-        .about {
-            padding: 80px 0;
-            background: white;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-text h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .about-text p {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .about-image {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 400px;
-            background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 80px 0;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
-                        url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
-            color: white;
-            text-align: center;
-        }
-
-        .contact-cta {
-            background: rgba(255,255,255,0.1);
-            padding: 3rem;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .contact-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .chat-button {
-                width: 50px;
-                height: 50px;
-                font-size: 20px;
-            }
-        }
-    </style>
+    .seccion {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <nav>
-            <div class="logo">
-                IA Gdp Asesoría
-            </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="hero">
-        <div class="hero-content">
-            <h1>Transforma tu Negocio con IA</h1>
-            <p>Expertos en asesoría y formación en Inteligencia Artificial. Te ayudamos a implementar soluciones innovadoras que impulsen tu empresa al futuro.</p>
-            <a href="#contacto" class="cta-button">Contáctanos</a>
-        </div>
-    </section>
+  <header>
+    <h1>Bienvenido a IA Gdp Asesoría</h1>
+    <p>Soluciones con Inteligencia Artificial para tu empresa</p>
+  </header>
 
-    <!-- Services Section -->
-    <section id="servicios" class="services">
-        <div class="container">
-            <h2 class="section-title">Nuestros Servicios</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
-                    <h3>Consultoría Estratégica en IA</h3>
-                    <p>Análisis profundo de tu negocio para identificar oportunidades de implementación de IA. Desarrollamos estrategias personalizadas que maximizan el ROI y optimizan procesos.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🧠</div>
-                    <h3>Formación y Capacitación</h3>
-                    <p>Programas de entrenamiento completos para equipos y directivos. Desde conceptos básicos hasta implementación avanzada de herramientas de IA.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
-                    <h3>Implementación de Soluciones</h3>
-                    <p>Desarrollo e integración de sistemas de IA personalizados. Automatización de procesos, chatbots inteligentes y análisis predictivo.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
-                    <h3>Análisis de Datos e IA</h3>
-                    <p>Transformamos tus datos en insights accionables utilizando machine learning y análisis avanzado para la toma de decisiones estratégicas.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
-                    <h3>Transformación Digital</h3>
-                    <p>Acompañamiento integral en la digitalización de procesos empresariales, integrando IA para optimizar la eficiencia operacional.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🛡️</div>
-                    <h3>IA Ética y Segura</h3>
-                    <p>Implementación responsable de IA con enfoque en privacidad, seguridad de datos y cumplimiento de regulaciones internacionales.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+  <main>
+    <div class="seccion">
+      <h2>¿Quiénes somos?</h2>
+      <p>Brindamos asesoría personalizada en el uso de inteligencia artificial para automatizar procesos y mejorar resultados.</p>
+    </div>
 
-    <!-- About Section -->
-    <section id="nosotros" class="about">
-        <div class="container">
-            <div class="about-content">
-                <div class="about-text">
-                    <h2>¿Por qué elegir IA Gdp Asesoría?</h2>
-                    <p>Somos un equipo de expertos especializados en Inteligencia Artificial y transformación digital, con años de experiencia ayudando a empresas de todos los tamaños a aprovechar el poder de la IA.</p>
-                    <p>Nuestro enfoque único combina conocimiento técnico profundo con una comprensión clara de las necesidades empresariales, garantizando soluciones que no solo son innovadoras, sino también prácticas y rentables.</p>
-                    <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
-                </div>
-                <div class="about-image"></div>
-            </div>
-        </div>
-    </section>
+    <div class="seccion">
+      <h2>Servicios</h2>
+      <ul>
+        <li>Automatización con IA</li>
+        <li>Creación de chatbots</li>
+        <li>Integraciones personalizadas</li>
+      </ul>
+    </div>
 
-    <!-- Contact Section -->
-    <section id="contacto" class="contact">
-        <div class="container">
-            <div class="contact-cta">
-                <h2>💼 Contacta con Nosotros</h2>
-                <p>¿Listo para transformar tu negocio? Estamos disponibles para responder tus preguntas y programar una consulta gratuita.</p>
-                <div style="margin-top: 2rem; opacity: 0.9;">
-                    <p>📧 iagdpasesoria@gmail.com | 📱 +57 304 292 3988</p>
-                    <p>📍 Centro Sincelejo - Colombia</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <div class="seccion">
+      <h2>Contáctanos</h2>
+      <p>Haz clic en el botón del chat abajo a la derecha para hablar con nosotros.</p>
+    </div>
+  </main>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 IA Gdp Asesoría. Todos los derechos reservados. | Transformando el futuro con Inteligencia Artificial</p>
-        </div>
-    </footer>
+  <!-- 🔵 Chatbot flotante Landbot -->
+  <script>
+    window.__landbot = window.__landbot || {};
+    window.__landbot.config = {
+      botId: 'H-2181015-XJNP8QUX3FBA9U8R' // Tu botId de Landbot
+    };
+    (function() {
+      var s = document.createElement('script');s.type = 'text/javascript';s.async = true;
+      s.addEventListener('load', function() {
+        var l = new window.Landbot.Livechat();
+        l.init();
+      });
+      s.src = 'https://static.landbot.io/landbot-3/landbot-3.0.0.js';
+      var x = document.getElementsByTagName('script')[0];
+      x.parentNode.insertBefore(s, x);
+    })();
+  </script>
 
-    <!-- Chat Button -->
-    <button class="chat-button" onclick="openChat()" title="Abrir Chat">
-        💬
-    </button>
-
-    <script>
-        // Navegación suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Efecto de scroll en header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(102, 126, 234, 0.95)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-            }
-        });
-
-        // Chatbot functionality
-        var myLandbot;
-        var chatLoaded = false;
-
-        function loadChatbot() {
-            if (!chatLoaded) {
-                var s = document.createElement('script');
-                s.type = "module";
-                s.async = true;
-                s.addEventListener('load', function() {
-                    myLandbot = new Landbot.Popup({
-                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
-                    });
-                    chatLoaded = true;
-                });
-                s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
-            }
-        }
-
-        function openChat() {
-            if (!chatLoaded) {
-                loadChatbot();
-                // Wait a moment for the script to load, then open
-                setTimeout(() => {
-                    if (myLandbot) {
-                        myLandbot.open();
-                    }
-                }, 1000);
-            } else {
-                myLandbot.open();
-            }
-        }
-    </script>
 </body>
 </html>
