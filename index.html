@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IA Gdp Asesoría - Expertos en Inteligencia Artificial</title>
+    <!-- Landbot Script -->
+    <script SameSite="None; Secure" type="module" src="https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs"></script>
     <style>
         * {
             margin: 0;
@@ -257,7 +259,7 @@
             text-align: center;
         }
 
-        .chat-cta {
+        .contact-cta {
             background: rgba(255,255,255,0.1);
             padding: 3rem;
             border-radius: 20px;
@@ -266,12 +268,12 @@
             margin: 0 auto;
         }
 
-        .chat-cta h2 {
+        .contact-cta h2 {
             font-size: 2.5rem;
             margin-bottom: 1.5rem;
         }
 
-        .chat-cta p {
+        .contact-cta p {
             font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.9;
@@ -285,294 +287,7 @@
             padding: 2rem 0;
         }
 
-        /* Chatbot Styles */
-        .chatbot-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 10000;
-        }
-
-        .chatbot-button {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-            transition: all 0.3s ease;
-            animation: pulse 2s infinite;
-        }
-
-        .chatbot-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        .chatbot-window {
-            position: absolute;
-            bottom: 80px;
-            right: 0;
-            width: 350px;
-            height: 500px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        .chatbot-window.show {
-            display: flex;
-        }
-
-        .chatbot-header {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .chatbot-header h3 {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .close-chat {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-chat:hover {
-            background: rgba(255,255,255,0.2);
-        }
-
-        .chatbot-messages {
-            flex: 1;
-            padding: 1rem;
-            overflow-y: auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .message {
-            max-width: 80%;
-            padding: 0.75rem 1rem;
-            border-radius: 15px;
-            animation: fadeInUp 0.3s ease;
-        }
-
-        .message.bot {
-            background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
-            color: #333;
-            align-self: flex-start;
-            border-bottom-left-radius: 5px;
-        }
-
-        .message.user {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            align-self: flex-end;
-            border-bottom-right-radius: 5px;
-        }
-
-        .chatbot-input {
-            padding: 1rem;
-            border-top: 1px solid #eee;
-            display: flex;
-            gap: 10px;
-        }
-
-        .chatbot-input input {
-            flex: 1;
-            padding: 0.75rem;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            outline: none;
-            font-size: 14px;
-        }
-
-        .chatbot-input input:focus {
-            border-color: #667eea;
-        }
-
-        .send-button {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .send-button:hover {
-            transform: scale(1.1);
-        }
-
-        .quick-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            margin-top: 10px;
-        }
-
-        .quick-option {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            border: 1px solid #667eea;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .quick-option:hover {
-            background: #667eea;
-            color: white;
-        }
-
-        .typing-indicator {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            padding: 0.75rem 1rem;
-            background: linear-gradient(45deg, #e3f2fd, #f3e5f5);
-            border-radius: 15px;
-            border-bottom-left-radius: 5px;
-            max-width: 80%;
-            align-self: flex-start;
-        }
-
-        .typing-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #667eea;
-            animation: typing 1.4s infinite;
-        }
-
-        .typing-dot:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .typing-dot:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-
-        /* Formulario de captura de leads */
-        .lead-form {
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            padding: 15px;
-            margin-top: 10px;
-            border: 2px solid #667eea;
-        }
-
-        .lead-form h4 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-
-        .form-group {
-            margin-bottom: 10px;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 12px;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #667eea;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        .form-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        .form-button {
-            flex: 1;
-            padding: 8px 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-primary {
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: #f5f5f5;
-            color: #666;
-        }
-
-        .form-button:hover {
-            transform: translateY(-1px);
-        }
-
-        .success-message {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            color: white;
-            padding: 15px;
-            border-radius: 10px;
-            text-align: center;
-            margin-top: 10px;
-            font-size: 14px;
-        }
-
         /* Animations */
-        @keyframes pulse {
-            0% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
-            50% { box-shadow: 0 4px 25px rgba(102, 126, 234, 0.6); }
-            100% { box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4); }
-        }
-
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -584,9 +299,34 @@
             }
         }
 
-        @keyframes typing {
-            0%, 60%, 100% { transform: translateY(0); }
-            30% { transform: translateY(-10px); }
+        /* Chatbot Button Styles */
+        .chatbot-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        .chatbot-button:active {
+            transform: scale(0.95);
         }
 
         /* Responsive */
@@ -607,14 +347,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .chatbot-window {
-                width: 320px;
-                height: 450px;
-            }
-
-            .chatbot-container {
-                bottom: 15px;
-                right: 15px;
+            .chatbot-button {
+                bottom: 20px;
+                right: 20px;
+                width: 55px;
+                height: 55px;
+                font-size: 22px;
             }
         }
     </style>
@@ -640,7 +378,7 @@
         <div class="hero-content">
             <h1>Transforma tu Negocio con IA</h1>
             <p>Expertos en asesoría y formación en Inteligencia Artificial. Te ayudamos a implementar soluciones innovadoras que impulsen tu empresa al futuro.</p>
-            <button class="cta-button" onclick="abrirChatbot()">Habla con nuestro Asistente IA</button>
+            <a href="#contacto" class="cta-button">Contáctanos</a>
         </div>
     </section>
 
@@ -701,11 +439,10 @@
     <!-- Contact Section -->
     <section id="contacto" class="contact">
         <div class="container">
-            <div class="chat-cta">
-                <h2>🤖 Habla con Nuestro Asistente IA</h2>
-                <p>¿Listo para transformar tu negocio? Nuestro asistente inteligente está disponible 24/7 para responder tus preguntas y programar una consulta gratuita.</p>
-                <button class="cta-button" onclick="abrirChatbot()">Iniciar Conversación</button>
-                <div style="margin-top: 2rem; opacity: 0.8;">
+            <div class="contact-cta">
+                <h2>💼 Contacta con Nosotros</h2>
+                <p>¿Listo para transformar tu negocio? Estamos disponibles para responder tus preguntas y programar una consulta gratuita.</p>
+                <div style="margin-top: 2rem; opacity: 0.9;">
                     <p>📧 iagdpasesoria@gmail.com | 📱 +57 304 292 3988</p>
                     <p>📍 Centro Sincelejo - Colombia</p>
                 </div>
@@ -720,434 +457,134 @@
         </div>
     </footer>
 
-    <!-- Chatbot -->
-    <div class="chatbot-container">
-        <button class="chatbot-button" id="chatbotButton" onclick="alternarChatbot()">
-            🤖
-        </button>
-        
-        <div class="chatbot-window" id="chatbotWindow">
-            <div class="chatbot-header">
-                <h3>🤖 Asistente IA Gdp</h3>
-                <button class="close-chat" onclick="cerrarChatbot()">×</button>
-            </div>
-            
-            <div class="chatbot-messages" id="chatMessages">
-                <div class="message bot">
-                    ¡Hola! 👋 Soy el asistente de IA Gdp Asesoría. Estoy aquí para ayudarte con cualquier pregunta sobre nuestros servicios de Inteligencia Artificial.
-                    <div class="quick-options">
-                        <div class="quick-option" onclick="enviarMensajeRapido('¿Qué servicios ofrecen?')">Servicios</div>
-                        <div class="quick-option" onclick="enviarMensajeRapido('Quiero una consulta gratuita')">Consulta Gratuita</div>
-                        <div class="quick-option" onclick="enviarMensajeRapido('¿Cuáles son sus precios?')">Precios</div>
-                        <div class="quick-option" onclick="enviarMensajeRapido('Información de contacto')">Contacto</div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="chatbot-input">
-                <input type="text" id="messageInput" placeholder="Escribe tu mensaje..." maxlength="500">
-                <button class="send-button" onclick="enviarMensaje()">📤</button>
-            </div>
-        </div>
-    </div>
+    <!-- Chatbot Button -->
+    <button class="chatbot-button" onclick="openChatbot()" title="Habla con nuestro asistente IA">
+        💬
+    </button>
 
     <script>
-        // Variables globales
-        const mensajesChat = document.getElementById('chatMessages');
-        const inputMensaje = document.getElementById('messageInput');
-        const ventanaChat = document.getElementById('chatbotWindow');
-        const botonChat = document.getElementById('chatbotButton');
-        let chatAbierto = false;
-        let datosUsuario = {};
+        // Variables globales para el chatbot
+        let myLandbot = null;
+        let chatbotOpen = false;
 
-        // Base de conocimiento del chatbot
-        const respuestasBot = {
-            'servicios': {
-                palabrasClave: ['servicio', 'que hacen', 'ofrecen', 'especialidad', 'hacemos'],
-                respuesta: '🎯 Ofrecemos 6 servicios principales:\n\n• Consultoría Estratégica en IA\n• Formación y Capacitación\n• Implementación de Soluciones\n• Análisis de Datos e IA\n• Transformación Digital\n• IA Ética y Segura\n\n¿Te interesa alguno en particular?',
-                opciones: ['Consultoría', 'Formación', 'Implementación', 'Análisis de Datos'],
-                capturarLead: true
-            },
-            'consulta': {
-                palabrasClave: ['consulta', 'reunion', 'cita', 'agendar', 'gratuita', 'gratis', 'evaluacion'],
-                respuesta: '📅 ¡Perfecto! Me encantaría ayudarte a agendar tu consulta gratuita.\n\nPara conectarte con nuestro equipo y personalizar la propuesta, necesito algunos datos básicos.',
-                opciones: [],
-                capturarLead: true,
-                mostrarFormulario: true
-            },
-            'contacto': {
-                palabrasClave: ['contacto', 'telefono', 'email', 'direccion', 'ubicacion'],
-                respuesta: '📞 Aquí tienes nuestros datos de contacto:\n\n📧 Email: iagdpasesoria@gmail.com\n📱 WhatsApp: +57 304 292 3988\n📍 Ubicación: Centro Sincelejo - Colombia\n🕒 Horario: Lun-Vie 8:00 AM - 6:00 PM\n\n¿Prefieres que te contactemos por WhatsApp o email?',
-                opciones: ['WhatsApp', 'Email', 'Llamada telefónica'],
-                capturarLead: false
-            },
-            'whatsapp': {
-                palabrasClave: ['whatsapp', 'wa', 'celular', 'mensaje'],
-                respuesta: '📱 ¡Perfecto! Te contactaremos por WhatsApp.\n\nPara enviarte la información más relevante, déjame capturar algunos datos básicos.',
-                opciones: [],
-                capturarLead: true,
-                mostrarFormulario: true
-            },
-            'email': {
-                palabrasClave: ['email', 'correo', 'mail'],
-                respuesta: '📧 ¡Excelente! Te enviaremos la información por email.\n\nPara personalizar nuestra propuesta, necesito algunos datos.',
-                opciones: [],
-                capturarLead: true,
-                mostrarFormulario: true
-            }
-        };
-
-        // Funciones principales del chatbot
-        function alternarChatbot() {
-            chatAbierto = !chatAbierto;
-            
-            if (chatAbierto) {
-                ventanaChat.classList.add('show');
-                botonChat.innerHTML = '💬';
-                inputMensaje.focus();
-            } else {
-                ventanaChat.classList.remove('show');
-                botonChat.innerHTML = '🤖';
+        // Inicializar el chatbot
+        function initChatbot() {
+            if (!myLandbot) {
+                myLandbot = new Landbot.Container({
+                    container: '#chatbot-container',
+                    configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
+                });
             }
         }
 
-        function abrirChatbot() {
-            ventanaChat.classList.add('show');
-            botonChat.innerHTML = '💬';
-            chatAbierto = true;
-            inputMensaje.focus();
-        }
+        // Función para abrir el chatbot
+        function openChatbot() {
+            if (!chatbotOpen) {
+                // Crear contenedor del chatbot si no existe
+                if (!document.getElementById('chatbot-container')) {
+                    const chatbotContainer = document.createElement('div');
+                    chatbotContainer.id = 'chatbot-container';
+                    chatbotContainer.style.cssText = `
+                        position: fixed;
+                        bottom: 100px;
+                        right: 30px;
+                        width: 400px;
+                        height: 600px;
+                        z-index: 1000;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+                        background: white;
+                        transition: all 0.3s ease;
+                        transform: scale(0.8) translateY(20px);
+                        opacity: 0;
+                    `;
+                    document.body.appendChild(chatbotContainer);
 
-        function cerrarChatbot() {
-            ventanaChat.classList.remove('show');
-            botonChat.innerHTML = '🤖';
-            chatAbierto = false;
-        }
+                    // Crear botón de cerrar
+                    const closeButton = document.createElement('button');
+                    closeButton.innerHTML = '✕';
+                    closeButton.style.cssText = `
+                        position: absolute;
+                        top: 10px;
+                        right: 10px;
+                        background: rgba(0,0,0,0.1);
+                        border: none;
+                        border-radius: 50%;
+                        width: 30px;
+                        height: 30px;
+                        cursor: pointer;
+                        z-index: 1001;
+                        color: #666;
+                        font-size: 16px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: all 0.2s ease;
+                    `;
+                    closeButton.onmouseover = () => {
+                        closeButton.style.background = 'rgba(0,0,0,0.2)';
+                    };
+                    closeButton.onmouseout = () => {
+                        closeButton.style.background = 'rgba(0,0,0,0.1)';
+                    };
+                    closeButton.onclick = closeChatbot;
+                    chatbotContainer.appendChild(closeButton);
 
-        function agregarMensaje(mensaje, esUsuario = false) {
-            const divMensaje = document.createElement('div');
-            divMensaje.className = `message ${esUsuario ? 'user' : 'bot'}`;
-            divMensaje.innerHTML = mensaje;
-            mensajesChat.appendChild(divMensaje);
-            mensajesChat.scrollTop = mensajesChat.scrollHeight;
-        }
-
-        function agregarIndicadorEscritura() {
-            const divEscritura = document.createElement('div');
-            divEscritura.className = 'typing-indicator';
-            divEscritura.id = 'escribiendo';
-            divEscritura.innerHTML = '<div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div>';
-            mensajesChat.appendChild(divEscritura);
-            mensajesChat.scrollTop = mensajesChat.scrollHeight;
-        }
-
-        function removerIndicadorEscritura() {
-            const escribiendo = document.getElementById('escribiendo');
-            if (escribiendo) {
-                escribiendo.remove();
-            }
-        }
-
-        function encontrarMejorRespuesta(mensajeUsuario) {
-            const mensaje = mensajeUsuario.toLowerCase();
-            let mejorCoincidencia = null;
-            let puntajeMaximo = 0;
-
-            for (const [clave, respuesta] of Object.entries(respuestasBot)) {
-                let puntaje = 0;
-                for (const palabraClave of respuesta.palabrasClave) {
-                    if (mensaje.includes(palabraClave)) {
-                        puntaje += palabraClave.length;
+                    // Ajustar para móviles
+                    if (window.innerWidth <= 768) {
+                        chatbotContainer.style.cssText = `
+                            position: fixed;
+                            top: 0;
+                            left: 0;
+                            width: 100vw;
+                            height: 100vh;
+                            z-index: 1000;
+                            border-radius: 0;
+                            overflow: hidden;
+                            box-shadow: none;
+                            background: white;
+                            transition: all 0.3s ease;
+                            transform: translateY(100%);
+                            opacity: 1;
+                        `;
                     }
                 }
-                if (puntaje > puntajeMaximo) {
-                    puntajeMaximo = puntaje;
-                    mejorCoincidencia = respuesta;
-                }
-            }
 
-            return mejorCoincidencia || {
-                respuesta: 'Entiendo tu consulta 🤔. Para brindarte la mejor información, ¿podrías ser más específico sobre qué aspecto de nuestros servicios de IA te interesa?\n\nPuedo ayudarte con:\n• Servicios y soluciones\n• Precios y presupuestos\n• Consultas gratuitas\n• Casos de éxito\n• Información de contacto',
-                opciones: ['Servicios', 'Precios', 'Consulta gratuita', 'Contacto'],
-                capturarLead: false
-            };
-        }
-
-        function crearOpcionesRapidas(opciones) {
-            if (!opciones || opciones.length === 0) return '';
-            
-            const opcionesHTML = opciones.map(opcion => 
-                `<div class="quick-option" onclick="enviarMensajeRapido('${opcion}')">${opcion}</div>`
-            ).join('');
-            
-            return `<div class="quick-options">${opcionesHTML}</div>`;
-        }
-
-        function crearFormularioLead() {
-            return `
-                <div class="lead-form">
-                    <h4>📋 Información de Contacto</h4>
-                    <div class="form-group">
-                        <input type="text" id="nombreLead" placeholder="Tu nombre completo *" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" id="emailLead" placeholder="Tu email *" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="telefonoLead" placeholder="Tu teléfono/WhatsApp *" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="empresaLead" placeholder="Nombre de tu empresa">
-                    </div>
-                    <div class="form-group">
-                        <select id="servicioLead">
-                            <option value="">Servicio de interés</option>
-                            <option value="consultoria">Consultoría Estratégica</option>
-                            <option value="formacion">Formación y Capacitación</option>
-                            <option value="implementacion">Implementación de Soluciones</option>
-                            <option value="analisis">Análisis de Datos e IA</option>
-                            <option value="transformacion">Transformación Digital</option>
-                            <option value="etica">IA Ética y Segura</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea id="mensajeLead" placeholder="Cuéntanos brevemente sobre tu proyecto o necesidad..."></textarea>
-                    </div>
-                    <div class="form-group">
-                        <select id="contactoPreferido">
-                            <option value="whatsapp">Prefiero WhatsApp</option>
-                            <option value="email">Prefiero Email</option>
-                            <option value="llamada">Prefiero llamada telefónica</option>
-                        </select>
-                    </div>
-                    <div class="form-buttons">
-                        <button class="form-button btn-primary" onclick="enviarLead()">Enviar Información</button>
-                        <button class="form-button btn-secondary" onclick="cancelarFormulario()">Cancelar</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function validarFormulario() {
-            const nombre = document.getElementById('nombreLead')?.value.trim();
-            const email = document.getElementById('emailLead')?.value.trim();
-            const telefono = document.getElementById('telefonoLead')?.value.trim();
-
-            if (!nombre || !email || !telefono) {
-                alert('Por favor completa los campos obligatorios (nombre, email y teléfono)');
-                return false;
-            }
-
-            // Validación básica de email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                alert('Por favor ingresa un email válido');
-                return false;
-            }
-
-            return true;
-        }
-
-        function enviarLead() {
-            if (!validarFormulario()) return;
-
-            // Capturar datos del formulario
-            datosUsuario = {
-                nombre: document.getElementById('nombreLead').value.trim(),
-                email: document.getElementById('emailLead').value.trim(),
-                telefono: document.getElementById('telefonoLead').value.trim(),
-                empresa: document.getElementById('empresaLead').value.trim(),
-                servicio: document.getElementById('servicioLead').value,
-                mensaje: document.getElementById('mensajeLead').value.trim(),
-                contactoPreferido: document.getElementById('contactoPreferido').value,
-                fecha: new Date().toLocaleString('es-CO'),
-                origen: 'Chatbot Web'
-            };
-
-            // Mostrar indicador de envío
-            agregarIndicadorEscritura();
-
-            setTimeout(() => {
-                removerIndicadorEscritura();
+                // Inicializar y mostrar el chatbot
+                initChatbot();
+                const container = document.getElementById('chatbot-container');
                 
-                // Enviar por el método preferido
-                if (datosUsuario.contactoPreferido === 'whatsapp') {
-                    enviarPorWhatsApp();
-                } else {
-                    enviarPorEmail();
-                }
-
-                // Mostrar mensaje de éxito
-                const mensajeExito = `
-                    <div class="success-message">
-                        ✅ ¡Información enviada exitosamente!<br>
-                        <strong>${datosUsuario.nombre}</strong>, te contactaremos por ${datosUsuario.contactoPreferido} en las próximas horas.
-                        <br><br>
-                        📱 Si es urgente, puedes escribirnos directamente al WhatsApp: +57 304 292 3988
-                    </div>
-                `;
-                
-                agregarMensaje(mensajeExito);
-                
-                // Opciones post-envío
                 setTimeout(() => {
-                    const opcionesFinales = `
-                        ¿Hay algo más en lo que pueda ayudarte mientras tanto?
-                        <div class="quick-options">
-                            <div class="quick-option" onclick="enviarMensajeRapido('Ver otros servicios')">Otros servicios</div>
-                            <div class="quick-option" onclick="enviarMensajeRapido('¿Cuándo me contactarán?')">Tiempo de respuesta</div>
-                            <div class="quick-option" onclick="enviarMensajeRapido('Gracias, eso es todo')">Terminar chat</div>
-                        </div>
-                    `;
-                    agregarMensaje(opcionesFinales);
-                }, 1000);
-                
-            }, 2000);
-        }
+                    if (window.innerWidth <= 768) {
+                        container.style.transform = 'translateY(0)';
+                    } else {
+                        container.style.transform = 'scale(1) translateY(0)';
+                        container.style.opacity = '1';
+                    }
+                }, 100);
 
-        function enviarPorWhatsApp() {
-            const mensaje = `🤖 *NUEVO LEAD - CHATBOT IA GDP ASESORÍA*
-
-👤 *Datos del Cliente:*
-• Nombre: ${datosUsuario.nombre}
-• Email: ${datosUsuario.email}
-• Teléfono: ${datosUsuario.telefono}
-• Empresa: ${datosUsuario.empresa || 'No especificada'}
-
-🎯 *Interés:*
-• Servicio: ${obtenerNombreServicio(datosUsuario.servicio)}
-• Mensaje: ${datosUsuario.mensaje || 'No especificó detalles adicionales'}
-
-📞 *Contacto preferido:* ${datosUsuario.contactoPreferido}
-📅 *Fecha:* ${datosUsuario.fecha}
-🌐 *Origen:* ${datosUsuario.origen}
-
----
-*Responder lo antes posible*`;
-
-            // Enviar al WhatsApp de la empresa
-            const numeroWhatsApp = '573042923988'; // Número sin espacios ni símbolos
-            const urlWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensaje)}`;
-            
-            // Abrir en nueva ventana (para que el chatbot no se interrumpa)
-            window.open(urlWhatsApp, '_blank');
-        }
-
-        function enviarPorEmail() {
-            const asunto = `Nuevo Lead del Chatbot - ${datosUsuario.nombre}`;
-            const cuerpoEmail = `
-NUEVO LEAD DESDE EL CHATBOT
-================================
-
-DATOS DEL CLIENTE:
-------------------
-Nombre: ${datosUsuario.nombre}
-Email: ${datosUsuario.email}
-Teléfono: ${datosUsuario.telefono}
-Empresa: ${datosUsuario.empresa || 'No especificada'}
-
-INFORMACIÓN DEL INTERÉS:
------------------------
-Servicio de interés: ${obtenerNombreServicio(datosUsuario.servicio)}
-Mensaje del cliente: ${datosUsuario.mensaje || 'No especificó detalles adicionales'}
-
-PREFERENCIAS DE CONTACTO:
-------------------------
-Método preferido: ${datosUsuario.contactoPreferido}
-
-INFORMACIÓN ADICIONAL:
----------------------
-Fecha de consulta: ${datosUsuario.fecha}
-Origen: ${datosUsuario.origen}
-
----
-Este lead se generó automáticamente desde el chatbot del sitio web.
-Responder lo antes posible para mantener el interés del cliente.
-            `;
-
-            // Crear enlace mailto
-            const mailtoLink = `mailto:iagdpasesoria@gmail.com?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpoEmail)}`;
-            
-            // Abrir cliente de email
-            window.location.href = mailtoLink;
-        }
-
-        function obtenerNombreServicio(codigo) {
-            const servicios = {
-                'consultoria': 'Consultoría Estratégica en IA',
-                'formacion': 'Formación y Capacitación',
-                'implementacion': 'Implementación de Soluciones',
-                'analisis': 'Análisis de Datos e IA',
-                'transformacion': 'Transformación Digital',
-                'etica': 'IA Ética y Segura'
-            };
-            return servicios[codigo] || 'No especificado';
-        }
-
-        function cancelarFormulario() {
-            const mensajeCancelacion = 'No hay problema 😊. Si cambias de opinión, estaré aquí para ayudarte.\n\n¿Hay algo más sobre nuestros servicios que te gustaría saber?';
-            const opciones = ['Servicios', 'Precios', 'Casos de éxito', 'Contacto'];
-            
-            agregarMensaje(mensajeCancelacion + crearOpcionesRapidas(opciones));
-        }
-
-        function enviarMensaje() {
-            const mensaje = inputMensaje.value.trim();
-            if (!mensaje) return;
-
-            // Agregar mensaje del usuario
-            agregarMensaje(mensaje, true);
-            inputMensaje.value = '';
-
-            // Mostrar indicador de escritura
-            agregarIndicadorEscritura();
-
-            // Simular tiempo de respuesta
-            setTimeout(() => {
-                removerIndicadorEscritura();
-                
-                const respuesta = encontrarMejorRespuesta(mensaje);
-                let mensajeBot = respuesta.respuesta;
-
-                // Agregar formulario si es necesario
-                if (respuesta.mostrarFormulario) {
-                    mensajeBot += crearFormularioLead();
-                } else if (respuesta.opciones) {
-                    mensajeBot += crearOpcionesRapidas(respuesta.opciones);
-                }
-                
-                agregarMensaje(mensajeBot);
-            }, 1500);
-        }
-
-        function enviarMensajeRapido(mensaje) {
-            agregarMensaje(mensaje, true);
-            
-            agregarIndicadorEscritura();
-            
-            setTimeout(() => {
-                removerIndicadorEscritura();
-                
-                const respuesta = encontrarMejorRespuesta(mensaje);
-                let mensajeBot = respuesta.respuesta;
-
-                // Agregar formulario si es necesario
-                if (respuesta.mostrarFormulario) {
-                    mensajeBot += crearFormularioLead();
-                } else if (respuesta.opciones) {
-                    mensajeBot += crearOpcionesRapidas(respuesta.opciones);
-                }
-                
-                agregarMensaje(mensajeBot);
-            }, 1000);
-        }
-
-        // Funcionalidad de Enter para enviar
-        inputMensaje.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                enviarMensaje();
+                chatbotOpen = true;
             }
-        });
+        }
+
+        // Función para cerrar el chatbot
+        function closeChatbot() {
+            const container = document.getElementById('chatbot-container');
+            if (container) {
+                if (window.innerWidth <= 768) {
+                    container.style.transform = 'translateY(100%)';
+                } else {
+                    container.style.transform = 'scale(0.8) translateY(20px)';
+                    container.style.opacity = '0';
+                }
+                
+                setTimeout(() => {
+                    container.remove();
+                    chatbotOpen = false;
+                }, 300);
+            }
+        }
 
         // Navegación suave
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1173,36 +610,12 @@ Responder lo antes posible para mantener el interés del cliente.
             }
         });
 
-        // Auto-pulso del botón después de 10 segundos
-        setTimeout(() => {
-            if (!chatAbierto) {
-                botonChat.style.animation = 'pulse 1s ease-in-out 3';
+        // Cerrar chatbot con tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && chatbotOpen) {
+                closeChatbot();
             }
-        }, 10000);
+        });
     </script>
 </body>
-</html>Lead: false
-            },
-            'consultoria': {
-                palabrasClave: ['consultoria', 'estrategia', 'analisis', 'roi', 'negocio'],
-                respuesta: '🎯 Nuestra Consultoría Estratégica incluye:\n\n• Análisis profundo de tu negocio\n• Identificación de oportunidades de IA\n• Estrategias personalizadas\n• Plan de implementación\n• ROI estimado\n\n¿Quieres programar una evaluación gratuita?',
-                opciones: ['Sí, programa evaluación', 'Más información', 'Otros servicios'],
-                capturarLead: true
-            },
-            'formacion': {
-                palabrasClave: ['formacion', 'capacitacion', 'entrenamient', 'curso', 'aprender'],
-                respuesta: '🧠 Nuestros programas de formación:\n\n• Conceptos básicos de IA\n• Herramientas prácticas\n• Casos de uso reales\n• Certificaciones\n• Modalidad presencial y virtual\n\n¿Para cuántas personas sería la capacitación?',
-                opciones: ['1-5 personas', '6-20 personas', '20+ personas', 'Consultar modalidades'],
-                capturarLead: true
-            },
-            'implementacion': {
-                palabrasClave: ['implementacion', 'desarrollo', 'chatbot', 'automatizacion', 'sistema'],
-                respuesta: '⚙️ Implementamos soluciones como:\n\n• Chatbots inteligentes\n• Automatización de procesos\n• Análisis predictivo\n• Sistemas personalizados\n• Integración con sistemas existentes\n\n¿Qué tipo de solución necesitas?',
-                opciones: ['Chatbot', 'Automatización', 'Análisis predictivo', 'Personalizada'],
-                capturarLead: true
-            },
-            'precios': {
-                palabrasClave: ['precio', 'costo', 'cuanto', 'tarifa', 'presupuesto'],
-                respuesta: '💰 Nuestros precios varían según:\n\n• Tipo de servicio\n• Duración del proyecto\n• Complejidad\n• Tamaño de la empresa\n\n🎁 ¡Ofrecemos consulta inicial GRATUITA!\n\n¿Te gustaría agendar una para conocer tu presupuesto específico?',
-                opciones: ['Agendar consulta gratuita', 'Más detalles de precios', 'Comparar servicios'],
-                capturar
+</html>
