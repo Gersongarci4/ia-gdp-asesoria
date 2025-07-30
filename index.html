@@ -3,12 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="IA Gdp Asesoría - Expertos en consultoría e implementación de Inteligencia Artificial para empresas. Transformación digital, formación y soluciones personalizadas en IA.">
+    <meta name="keywords" content="inteligencia artificial, IA, consultoría, transformación digital, machine learning, automatización, Colombia">
+    <meta name="author" content="IA Gdp Asesoría">
+    <meta property="og:title" content="IA Gdp Asesoría - Transformamos tu Negocio con IA">
+    <meta property="og:description" content="Expertos en asesoría y formación en Inteligencia Artificial. Implementamos soluciones innovadoras para impulsar tu empresa al futuro.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <title>IA Gdp Asesoría - Expertos en Inteligencia Artificial</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -29,6 +41,7 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -52,21 +65,17 @@
         }
 
         .logo::before {
-            content: "";
-            width: 40px;
-            height: 40px;
+            content: "🤖";
+            font-size: 2rem;
             margin-right: 10px;
-            background-image: url('logotipo.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            display: block;
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
         }
 
         .nav-links {
             display: flex;
             list-style: none;
             gap: 2rem;
+            transition: all 0.3s ease;
         }
 
         .nav-links a {
@@ -76,17 +85,58 @@
             transition: all 0.3s ease;
             padding: 0.5rem 1rem;
             border-radius: 25px;
+            position: relative;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active {
             background: rgba(255,255,255,0.2);
             transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        .mobile-menu a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            transition: background 0.3s ease;
+        }
+
+        .mobile-menu a:hover {
+            background: rgba(255,255,255,0.1);
         }
 
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
-                        url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+                        linear-gradient(45deg, #1a1a2e, #16213e);
             color: white;
             padding: 120px 0 80px;
             text-align: center;
@@ -95,6 +145,19 @@
             min-height: 100vh;
             display: flex;
             align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(255,255,255,0.05) 0%, transparent 50%);
+            animation: float 6s ease-in-out infinite;
         }
 
         .hero-content {
@@ -136,11 +199,58 @@
             animation: fadeInUp 1s ease 0.4s both;
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
         }
 
         .cta-button:hover {
-            transform: translateY(-3px);
+            transform: translateY(-3px) scale(1.05);
             box-shadow: 0 15px 40px rgba(238, 90, 36, 0.4);
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            font-size: 20px;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            display: flex;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
         }
 
         /* Chat Button */
@@ -162,11 +272,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: pulse 2s infinite;
         }
 
         .chat-button:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 25px rgba(102, 126, 234, 0.4);
+            animation: none;
         }
 
         /* Services Section */
@@ -190,6 +302,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: fadeInUp 0.6s ease;
         }
 
         .services-grid {
@@ -206,6 +319,7 @@
             position: relative;
             overflow: hidden;
             padding: 2rem;
+            cursor: pointer;
         }
 
         .service-card::before {
@@ -216,6 +330,13 @@
             right: 0;
             height: 4px;
             background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
         }
 
         .service-card:hover {
@@ -230,12 +351,25 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
         .service-card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: #333;
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover h3 {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* About Section */
@@ -264,21 +398,122 @@
             margin-bottom: 1rem;
             font-size: 1.1rem;
             line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
         }
+
+        .about-text p:nth-child(3) { animation-delay: 0.2s; }
+        .about-text p:nth-child(4) { animation-delay: 0.4s; }
+        .about-text p:nth-child(5) { animation-delay: 0.6s; }
 
         .about-image {
             position: relative;
             border-radius: 20px;
             overflow: hidden;
             height: 400px;
-            background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        /* Contact Section */
+        /* Contact Form Section */
+        .contact-form {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Contact Info Section */
         .contact {
             padding: 80px 0;
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.9), rgba(118, 75, 162, 0.9)), 
-                        url('https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80') center/cover;
+                        linear-gradient(45deg, #1a1a2e, #16213e);
             color: white;
             text-align: center;
         }
@@ -303,12 +538,49 @@
             opacity: 0.9;
         }
 
+        /* Success/Error Messages */
+        .message {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.show {
+            display: block;
+            animation: fadeInUp 0.3s ease;
+        }
+
         /* Footer */
         footer {
             background: #333;
             color: white;
             text-align: center;
             padding: 2rem 0;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+            border-top: 2px solid #fff;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-left: 10px;
         }
 
         /* Animations */
@@ -323,14 +595,49 @@
             }
         }
 
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
             }
 
+            .mobile-menu-toggle {
+                display: block;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
             }
 
             .about-content {
@@ -341,27 +648,74 @@
                 grid-template-columns: 1fr;
             }
 
+            .service-card {
+                margin-bottom: 1rem;
+            }
+
             .chat-button {
                 width: 50px;
                 height: 50px;
                 font-size: 20px;
+            }
+
+            .back-to-top {
+                bottom: 90px;
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 100px 0 60px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .service-card {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="header">
         <nav>
             <div class="logo">
                 IA Gdp Asesoría
             </div>
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#nosotros">Nosotros</a></li>
-                <li><a href="#contacto">Contacto</a></li>
+                <li><a href="#inicio" class="nav-link">Inicio</a></li>
+                <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                <li><a href="#formulario" class="nav-link">Contacto</a></li>
             </ul>
+            <button class="mobile-menu-toggle" aria-label="Abrir menú">
+                ☰
+            </button>
+            <div class="mobile-menu">
+                <a href="#inicio">Inicio</a>
+                <a href="#servicios">Servicios</a>
+                <a href="#nosotros">Nosotros</a>
+                <a href="#formulario">Contacto</a>
+            </div>
         </nav>
     </header>
 
@@ -370,7 +724,7 @@
         <div class="hero-content">
             <h1>Transforma tu Negocio con IA</h1>
             <p>Expertos en asesoría y formación en Inteligencia Artificial. Te ayudamos a implementar soluciones innovadoras que impulsen tu empresa al futuro.</p>
-            <a href="#contacto" class="cta-button">Contáctanos</a>
+            <a href="#formulario" class="cta-button" aria-label="Ir al formulario de contacto">Contáctanos</a>
         </div>
     </section>
 
@@ -379,36 +733,36 @@
         <div class="container">
             <h2 class="section-title">Nuestros Servicios</h2>
             <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">🎯</div>
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">🎯</div>
                     <h3>Consultoría Estratégica en IA</h3>
                     <p>Análisis profundo de tu negocio para identificar oportunidades de implementación de IA. Desarrollamos estrategias personalizadas que maximizan el ROI y optimizan procesos.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🧠</div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">🧠</div>
                     <h3>Formación y Capacitación</h3>
                     <p>Programas de entrenamiento completos para equipos y directivos. Desde conceptos básicos hasta implementación avanzada de herramientas de IA.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">⚙️</div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">⚙️</div>
                     <h3>Implementación de Soluciones</h3>
                     <p>Desarrollo e integración de sistemas de IA personalizados. Automatización de procesos, chatbots inteligentes y análisis predictivo.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">📊</div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">📊</div>
                     <h3>Análisis de Datos e IA</h3>
                     <p>Transformamos tus datos en insights accionables utilizando machine learning y análisis avanzado para la toma de decisiones estratégicas.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🚀</div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">🚀</div>
                     <h3>Transformación Digital</h3>
                     <p>Acompañamiento integral en la digitalización de procesos empresariales, integrando IA para optimizar la eficiencia operacional.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">🛡️</div>
+                </article>
+                <article class="service-card">
+                    <div class="service-icon" aria-hidden="true">🛡️</div>
                     <h3>IA Ética y Segura</h3>
                     <p>Implementación responsable de IA con enfoque en privacidad, seguridad de datos y cumplimiento de regulaciones internacionales.</p>
-                </div>
+                </article>
             </div>
         </div>
     </section>
@@ -423,20 +777,76 @@
                     <p>Nuestro enfoque único combina conocimiento técnico profundo con una comprensión clara de las necesidades empresariales, garantizando soluciones que no solo son innovadoras, sino también prácticas y rentables.</p>
                     <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
                 </div>
-                <div class="about-image"></div>
+                <div class="about-image" aria-label="Representación visual de inteligencia artificial">
+                    🤖
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Contact Form Section -->
+    <section id="formulario" class="contact-form">
+        <div class="container">
+            <h2 class="section-title">Cuéntanos sobre tu Proyecto</h2>
+            <div class="form-container">
+                <div id="form-message" class="message"></div>
+                <form id="contact-form" novalidate>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="nombre">Nombre *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="empresa">Empresa</label>
+                            <input type="text" id="empresa" name="empresa">
+                        </div>
+                    </div>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="email">Email *</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="telefono">Teléfono</label>
+                            <input type="tel" id="telefono" name="telefono">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="servicio">Servicio de Interés</label>
+                        <select id="servicio" name="servicio">
+                            <option value="">Selecciona un servicio</option>
+                            <option value="consultoria">Consultoría Estratégica en IA</option>
+                            <option value="formacion">Formación y Capacitación</option>
+                            <option value="implementacion">Implementación de Soluciones</option>
+                            <option value="analisis">Análisis de Datos e IA</option>
+                            <option value="transformacion">Transformación Digital</option>
+                            <option value="etica">IA Ética y Segura</option>
+                            <option value="otro">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="mensaje">Mensaje *</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos sobre tu proyecto, objetivos y cómo podemos ayudarte..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        Enviar Mensaje
+                        <span class="spinner" style="display: none;"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Info Section -->
     <section id="contacto" class="contact">
         <div class="container">
             <div class="contact-cta">
-                <h2>💼 Contacta con Nosotros</h2>
+                <h2>💼 Información de Contacto</h2>
                 <p>¿Listo para transformar tu negocio? Estamos disponibles para responder tus preguntas y programar una consulta gratuita.</p>
                 <div style="margin-top: 2rem; opacity: 0.9;">
-                    <p>📧 iagdpasesoria@gmail.com | 📱 +57 304 292 3988</p>
-                    <p>📍 Centro Sincelejo - Colombia</p>
+                    <p><strong>📧 Email:</strong> iagdpasesoria@gmail.com</p>
+                    <p><strong>📱 WhatsApp:</strong> +57 304 292 3988</p>
+                    <p><strong>📍 Ubicación:</strong> Centro Sincelejo - Colombia</p>
                 </div>
             </div>
         </div>
@@ -449,13 +859,22 @@
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()" aria-label="Volver arriba">
+        ↑
+    </button>
+
     <!-- Chat Button -->
-    <button class="chat-button" onclick="openChat()" title="Abrir Chat">
+    <button class="chat-button" onclick="openChat()" title="Abrir Chat" aria-label="Abrir chat de asistencia">
         💬
     </button>
 
     <script>
-        // Navegación suave
+        // Variables globales
+        let myLandbot;
+        let chatLoaded = false;
+
+        // Navegación suave y actualización de enlaces activos
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -469,50 +888,397 @@
             });
         });
 
-        // Efecto de scroll en header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.background = 'rgba(102, 126, 234, 0.95)';
-            } else {
-                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+        // Menú móvil
+        const mobileToggle = document.querySelector('.mobile-menu-toggle');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        mobileToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+            this.innerHTML = mobileMenu.classList.contains('active') ? '✕' : '☰';
+        });
+
+        // Cerrar menú móvil al hacer click en un enlace
+        document.querySelector('.mobile-menu').addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                mobileMenu.classList.remove('active');
+                mobileToggle.innerHTML = '☰';
             }
         });
 
-        // Chatbot functionality
-        var myLandbot;
-        var chatLoaded = false;
+        // Efecto de scroll en header y botón back to top
+        let lastScrollTop = 0;
+        const header = document.getElementById('header');
+        const backToTop = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', function() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Header background change
+            if (scrollTop > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.boxShadow = '0 4px 30px rgba(0,0,0,0.2)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            }
+
+            // Back to top button
+            if (scrollTop > 300) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+
+            // Update active navigation
+            updateActiveNavigation();
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Actualizar navegación activa
+        function updateActiveNavigation() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 120;
+                const sectionHeight = section.clientHeight;
+                if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionTop + sectionHeight) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Formulario de contacto
+        const contactForm = document.getElementById('contact-form');
+        const formMessage = document.getElementById('form-message');
+
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const spinner = submitBtn.querySelector('.spinner');
+            const formData = new FormData(this);
+            
+            // Validación básica
+            const nombre = formData.get('nombre').trim();
+            const email = formData.get('email').trim();
+            const mensaje = formData.get('mensaje').trim();
+            
+            if (!nombre || !email || !mensaje) {
+                showMessage('Por favor, completa todos los campos obligatorios.', 'error');
+                return;
+            }
+            
+            if (!isValidEmail(email)) {
+                showMessage('Por favor, ingresa un email válido.', 'error');
+                return;
+            }
+            
+            // Simular envío del formulario
+            submitBtn.disabled = true;
+            spinner.style.display = 'inline-block';
+            submitBtn.innerHTML = 'Enviando... <span class="spinner"></span>';
+            
+            // Simular delay de envío
+            setTimeout(() => {
+                showMessage('¡Gracias por tu mensaje! Te contactaremos pronto.', 'success');
+                contactForm.reset();
+                submitBtn.disabled = false;
+                spinner.style.display = 'none';
+                submitBtn.innerHTML = 'Enviar Mensaje';
+                
+                // Opcional: redirigir al chat o mostrar más información
+                setTimeout(() => {
+                    if (confirm('¿Te gustaría chatear con nosotros ahora para una respuesta más rápida?')) {
+                        openChat();
+                    }
+                }, 2000);
+                
+            }, 2000);
+        });
+
+        // Función para mostrar mensajes
+        function showMessage(text, type) {
+            formMessage.textContent = text;
+            formMessage.className = `message ${type} show`;
+            formMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            setTimeout(() => {
+                formMessage.classList.remove('show');
+            }, 5000);
+        }
+
+        // Validar email
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        // Chatbot Configuration
+        const CHATBOT_CONFIG = {
+            // OPCIÓN 1: Si tienes tu propio chatbot de Landbot, reemplaza esta URL
+            // configUrl: 'TU_URL_REAL_DE_LANDBOT_AQUI',
+            
+            // OPCIÓN 2: Para usar solo WhatsApp, cambia enabled a false
+            configUrl: '', // Dejar vacío si no tienes chatbot
+            whatsappNumber: '573042923988',
+            whatsappMessage: 'Hola! Me interesa conocer más sobre sus servicios de IA. ¿Podrían ayudarme?',
+            enabled: false, // Cambiar a true cuando tengas el chatbot configurado
+            testConnection: false // Desactivar test si no hay chatbot configurado
+        };
+
+        // Chatbot functionality mejorado
+        function showChatLoading() {
+            const chatButton = document.querySelector('.chat-button');
+            chatButton.innerHTML = '⏳';
+            chatButton.style.animation = 'spin 1s linear infinite';
+        }
+
+        function hideChatLoading() {
+            const chatButton = document.querySelector('.chat-button');
+            chatButton.innerHTML = '💬';
+            chatButton.style.animation = 'pulse 2s infinite';
+        }
 
         function loadChatbot() {
-            if (!chatLoaded) {
-                var s = document.createElement('script');
-                s.type = "module";
-                s.async = true;
-                s.addEventListener('load', function() {
-                    myLandbot = new Landbot.Popup({
-                        configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
-                    });
-                    chatLoaded = true;
+            if (!chatLoaded && CHATBOT_CONFIG.enabled && CHATBOT_CONFIG.configUrl) {
+                showChatLoading();
+                
+                const script = document.createElement('script');
+                script.type = "module";
+                script.async = true;
+                
+                script.addEventListener('load', function() {
+                    try {
+                        // Verificar si Landbot está disponible
+                        if (typeof Landbot !== 'undefined') {
+                            myLandbot = new Landbot.Popup({
+                                configUrl: CHATBOT_CONFIG.configUrl,
+                            });
+                            chatLoaded = true;
+                            hideChatLoading();
+                            
+                            // Mostrar notificación de éxito (opcional)
+                            console.log('✅ Chatbot cargado correctamente');
+                            
+                        } else {
+                            throw new Error('Landbot no está disponible');
+                        }
+                    } catch (error) {
+                        console.warn('⚠️ Error al cargar chatbot:', error.message);
+                        chatLoaded = false;
+                        hideChatLoading();
+                        fallbackToWhatsApp('Error al cargar el chatbot');
+                    }
                 });
-                s.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
-                var x = document.getElementsByTagName('script')[0];
-                x.parentNode.insertBefore(s, x);
+
+                script.addEventListener('error', function(e) {
+                    console.error('❌ Error al cargar script del chatbot:', e);
+                    chatLoaded = false;
+                    hideChatLoading();
+                    fallbackToWhatsApp('No se pudo cargar el servicio de chat');
+                });
+
+                script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
+                document.head.appendChild(script);
+                
+                // Timeout de seguridad
+                setTimeout(() => {
+                    if (!chatLoaded) {
+                        console.warn('⏰ Timeout al cargar chatbot');
+                        hideChatLoading();
+                        fallbackToWhatsApp('El chat está tardando en cargar');
+                    }
+                }, 10000); // 10 segundos
+            } else if (!CHATBOT_CONFIG.configUrl) {
+                console.log('ℹ️ No hay URL de chatbot configurada, usando WhatsApp directamente');
             }
+        }
+
+        function fallbackToWhatsApp(reason = '') {
+            const message = CHATBOT_CONFIG.whatsappMessage + (reason ? ` (${reason})` : '');
+            const whatsappUrl = `https://wa.me/${CHATBOT_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Mostrar notificación opcional
+            if (reason) {
+                showTemporaryNotification('Redirigiendo a WhatsApp...', 2000);
+            }
+            
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        }
+
+        function showTemporaryNotification(message, duration = 3000) {
+            // Crear notificación temporal
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(45deg, #667eea, #764ba2);
+                color: white;
+                padding: 12px 20px;
+                border-radius: 25px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 10000;
+                font-size: 14px;
+                animation: fadeInUp 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeInUp 0.3s ease reverse';
+                setTimeout(() => document.body.removeChild(notification), 300);
+            }, duration);
         }
 
         function openChat() {
+            // Si el chatbot está deshabilitado, ir directo a WhatsApp
+            if (!CHATBOT_CONFIG.enabled) {
+                fallbackToWhatsApp();
+                return;
+            }
+
             if (!chatLoaded) {
+                // Mostrar indicador de carga
+                showChatLoading();
+                
                 loadChatbot();
-                // Wait a moment for the script to load, then open
+                
+                // Intentar abrir después de un delay
                 setTimeout(() => {
-                    if (myLandbot) {
-                        myLandbot.open();
+                    if (myLandbot && chatLoaded) {
+                        try {
+                            myLandbot.open();
+                            hideChatLoading();
+                        } catch (error) {
+                            console.error('Error al abrir chatbot:', error);
+                            fallbackToWhatsApp('Error al abrir el chat');
+                        }
+                    } else {
+                        fallbackToWhatsApp('El chat no se ha cargado correctamente');
                     }
-                }, 1000);
+                }, 2000);
+                
             } else {
-                myLandbot.open();
+                // Chatbot ya cargado, intentar abrir
+                try {
+                    myLandbot.open();
+                } catch (error) {
+                    console.error('Error al abrir chatbot cargado:', error);
+                    fallbackToWhatsApp('Error al abrir el chat');
+                }
             }
         }
+
+        // Función para probar la conectividad del chatbot
+        function testChatbotConnection() {
+            // Solo hacer el test si está habilitado y hay URL configurada
+            if (!CHATBOT_CONFIG.testConnection || !CHATBOT_CONFIG.configUrl || !CHATBOT_CONFIG.enabled) {
+                console.log('ℹ️ Test de chatbot omitido - usando configuración manual');
+                return;
+            }
+
+            fetch(CHATBOT_CONFIG.configUrl, { method: 'HEAD', mode: 'no-cors' })
+                .then(() => {
+                    console.log('🔗 Configuración del chatbot accesible');
+                })
+                .catch(() => {
+                    console.warn('⚠️ Configuración del chatbot no accesible, usando WhatsApp como backup');
+                    CHATBOT_CONFIG.enabled = false;
+                    switchChatMode(true);
+                });
+        }
+
+        // Función para cambiar entre chatbot y WhatsApp
+        function switchChatMode(useWhatsApp = false) {
+            CHATBOT_CONFIG.enabled = !useWhatsApp;
+            const chatButton = document.querySelector('.chat-button');
+            
+            if (useWhatsApp) {
+                chatButton.title = 'Abrir WhatsApp';
+                chatButton.innerHTML = '📱';
+            } else {
+                chatButton.title = 'Abrir Chat';
+                chatButton.innerHTML = '💬';
+            }
+        }
+
+        // Animaciones al hacer scroll (Intersection Observer)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animaciones
+        document.addEventListener('DOMContentLoaded', function() {
+            const elementsToAnimate = document.querySelectorAll('.service-card, .about-text p');
+            elementsToAnimate.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        });
+
+        // Precargar y probar el chatbot después de que la página se cargue
+        window.addEventListener('load', function() {
+            // Probar conectividad primero
+            testChatbotConnection();
+            
+            // Precargar chatbot después de 3 segundos
+            setTimeout(() => {
+                if (CHATBOT_CONFIG.enabled) {
+                    loadChatbot();
+                }
+            }, 3000);
+        });
+
+        // Manejar errores de JavaScript
+        window.addEventListener('error', function(e) {
+            console.log('Error capturado:', e.error);
+            // Si el error está relacionado con el chatbot, deshabilitar
+            if (e.error && e.error.message && e.error.message.includes('Landbot')) {
+                console.warn('Error relacionado con Landbot, deshabilitando chatbot');
+                CHATBOT_CONFIG.enabled = false;
+                switchChatMode(true);
+            }
+        });
+
+        // Función para administradores: cambiar modo de chat
+        // Usar en consola: toggleChatMode()
+        window.toggleChatMode = function() {
+            CHATBOT_CONFIG.enabled = !CHATBOT_CONFIG.enabled;
+            switchChatMode(!CHATBOT_CONFIG.enabled);
+            console.log(`Modo de chat: ${CHATBOT_CONFIG.enabled ? 'Chatbot' : 'WhatsApp'}`);
+        };
     </script>
 </body>
 </html>
