@@ -66,9 +66,9 @@
 
         .logo::before {
             content: "";
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
+            width: 60px;
+            height: 60px;
+            margin-right: 15px;
             background-image: url('logogdp.png');
             background-size: contain;
             background-repeat: no-repeat;
@@ -417,12 +417,7 @@
             border-radius: 20px;
             overflow: hidden;
             height: 400px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            color: white;
+            background: url('https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
@@ -783,9 +778,7 @@
                     <p>Nuestro enfoque único combina conocimiento técnico profundo con una comprensión clara de las necesidades empresariales, garantizando soluciones que no solo son innovadoras, sino también prácticas y rentables.</p>
                     <p>Creemos que la IA debe ser accesible para todos. Por eso, trabajamos estrechamente contigo para desmitificar la tecnología y crear un camino claro hacia la implementación exitosa.</p>
                 </div>
-                <div class="about-image" aria-label="Representación visual de inteligencia artificial">
-                    🤖
-                </div>
+                <div class="about-image"></div>
             </div>
         </div>
     </section>
@@ -1040,15 +1033,12 @@
 
         // Chatbot Configuration
         const CHATBOT_CONFIG = {
-            // OPCIÓN 1: Si tienes tu propio chatbot de Landbot, reemplaza esta URL
-            // configUrl: 'TU_URL_REAL_DE_LANDBOT_AQUI',
-            
-            // OPCIÓN 2: Para usar solo WhatsApp, cambia enabled a false
-            configUrl: '', // Dejar vacío si no tienes chatbot
+            // Configura aquí tu URL real de Landbot cuando la tengas
+            configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
             whatsappNumber: '573042923988',
             whatsappMessage: 'Hola! Me interesa conocer más sobre sus servicios de IA. ¿Podrían ayudarme?',
-            enabled: false, // Cambiar a true cuando tengas el chatbot configurado
-            testConnection: false // Desactivar test si no hay chatbot configurado
+            enabled: true, // Cambiar a false para usar solo WhatsApp
+            testConnection: true // Test de conectividad al cargar
         };
 
         // Chatbot functionality mejorado
