@@ -142,7 +142,11 @@
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%), 
+                        url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'),
                         linear-gradient(45deg, #1a1a2e, #16213e);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             color: white;
             padding: 120px 0 80px;
             text-align: center;
@@ -844,6 +848,7 @@
                 <p>¿Listo para transformar tu negocio? Estamos disponibles para responder tus preguntas y programar una consulta gratuita.</p>
                 <div style="margin-top: 2rem; opacity: 0.9;">
                     <p><strong>📍 Ubicación:</strong> Centro Sincelejo - Colombia</p>
+                    <p><strong>📱 WhatsApp:</strong> +57 304 292 3988</p>
                 </div>
             </div>
         </div>
@@ -1029,17 +1034,16 @@
             return emailRegex.test(email);
         }
 
-        // Chatbot Configuration
+        // ✅ CONFIGURACIÓN CORREGIDA DEL CHATBOT
         const CHATBOT_CONFIG = {
-            // Configura aquí tu URL real de Landbot cuando la tengas
-            configUrl: 'https://storage.googleapis.com/landbot.online/v3/H-3066604-MY6YFUBE4631LC7Y/index.json',
+            configUrl: '', // Vacío para evitar tests automáticos
             whatsappNumber: '573042923988',
             whatsappMessage: 'Hola! Me interesa conocer más sobre sus servicios de IA. ¿Podrían ayudarme?',
-            enabled: true, // Cambiar a false para usar solo WhatsApp
-            testConnection: true // Test de conectividad al cargar
+            enabled: false, // Deshabilitado por defecto
+            testConnection: false // Sin tests automáticos
         };
 
-        // Chatbot functionality mejorado
+        // Funciones del chatbot corregidas
         function showChatLoading() {
             const chatButton = document.querySelector('.chat-button');
             chatButton.innerHTML = '⏳';
@@ -1062,17 +1066,13 @@
                 
                 script.addEventListener('load', function() {
                     try {
-                        // Verificar si Landbot está disponible
                         if (typeof Landbot !== 'undefined') {
                             myLandbot = new Landbot.Popup({
                                 configUrl: CHATBOT_CONFIG.configUrl,
                             });
                             chatLoaded = true;
                             hideChatLoading();
-                            
-                            // Mostrar notificación de éxito (opcional)
                             console.log('✅ Chatbot cargado correctamente');
-                            
                         } else {
                             throw new Error('Landbot no está disponible');
                         }
@@ -1080,7 +1080,7 @@
                         console.warn('⚠️ Error al cargar chatbot:', error.message);
                         chatLoaded = false;
                         hideChatLoading();
-                        fallbackToWhatsApp('Error al cargar el chatbot');
+                        console.log('Chatbot no disponible, usar botón para WhatsApp');
                     }
                 });
 
@@ -1088,39 +1088,34 @@
                     console.error('❌ Error al cargar script del chatbot:', e);
                     chatLoaded = false;
                     hideChatLoading();
-                    fallbackToWhatsApp('No se pudo cargar el servicio de chat');
+                    console.log('Error al cargar chatbot, usar botón para WhatsApp');
                 });
 
                 script.src = 'https://cdn.landbot.io/landbot-3/landbot-3.0.0.mjs';
                 document.head.appendChild(script);
                 
-                // Timeout de seguridad
                 setTimeout(() => {
                     if (!chatLoaded) {
                         console.warn('⏰ Timeout al cargar chatbot');
                         hideChatLoading();
-                        fallbackToWhatsApp('El chat está tardando en cargar');
+                        console.log('Timeout en chatbot, usar botón para WhatsApp');
                     }
-                }, 10000); // 10 segundos
-            } else if (!CHATBOT_CONFIG.configUrl) {
-                console.log('ℹ️ No hay URL de chatbot configurada, usando WhatsApp directamente');
+                }, 10000);
             }
         }
 
-        function fallbackToWhatsApp(reason = '') {
+        function openWhatsApp(reason = '') {
             const message = CHATBOT_CONFIG.whatsappMessage + (reason ? ` (${reason})` : '');
             const whatsappUrl = `https://wa.me/${CHATBOT_CONFIG.whatsappNumber}?text=${encodeURIComponent(message)}`;
             
-            // Mostrar notificación opcional
             if (reason) {
-                showTemporaryNotification('Redirigiendo a WhatsApp...', 2000);
+                showTemporaryNotification('Abriendo WhatsApp...', 2000);
             }
             
             window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
         }
 
         function showTemporaryNotification(message, duration = 3000) {
-            // Crear notificación temporal
             const notification = document.createElement('div');
             notification.style.cssText = `
                 position: fixed;
@@ -1144,20 +1139,18 @@
             }, duration);
         }
 
+        // ✅ FUNCIÓN CORREGIDA: Solo abre cuando el usuario hace clic
         function openChat() {
-            // Si el chatbot está deshabilitado, ir directo a WhatsApp
-            if (!CHATBOT_CONFIG.enabled) {
-                fallbackToWhatsApp();
+            // Si no hay chatbot configurado, abrir WhatsApp directamente
+            if (!CHATBOT_CONFIG.enabled || !CHATBOT_CONFIG.configUrl) {
+                openWhatsApp();
                 return;
             }
 
             if (!chatLoaded) {
-                // Mostrar indicador de carga
                 showChatLoading();
-                
                 loadChatbot();
                 
-                // Intentar abrir después de un delay
                 setTimeout(() => {
                     if (myLandbot && chatLoaded) {
                         try {
@@ -1165,50 +1158,29 @@
                             hideChatLoading();
                         } catch (error) {
                             console.error('Error al abrir chatbot:', error);
-                            fallbackToWhatsApp('Error al abrir el chat');
+                            openWhatsApp('Error al abrir el chat');
                         }
                     } else {
-                        fallbackToWhatsApp('El chat no se ha cargado correctamente');
+                        openWhatsApp('El chat no se ha cargado correctamente');
                     }
                 }, 2000);
                 
             } else {
-                // Chatbot ya cargado, intentar abrir
                 try {
                     myLandbot.open();
                 } catch (error) {
                     console.error('Error al abrir chatbot cargado:', error);
-                    fallbackToWhatsApp('Error al abrir el chat');
+                    openWhatsApp('Error al abrir el chat');
                 }
             }
         }
 
-        // Función para probar la conectividad del chatbot
-        function testChatbotConnection() {
-            // Solo hacer el test si está habilitado y hay URL configurada
-            if (!CHATBOT_CONFIG.testConnection || !CHATBOT_CONFIG.configUrl || !CHATBOT_CONFIG.enabled) {
-                console.log('ℹ️ Test de chatbot omitido - usando configuración manual');
-                return;
-            }
-
-            fetch(CHATBOT_CONFIG.configUrl, { method: 'HEAD', mode: 'no-cors' })
-                .then(() => {
-                    console.log('🔗 Configuración del chatbot accesible');
-                })
-                .catch(() => {
-                    console.warn('⚠️ Configuración del chatbot no accesible, usando WhatsApp como backup');
-                    CHATBOT_CONFIG.enabled = false;
-                    switchChatMode(true);
-                });
-        }
-
-        // Función para cambiar entre chatbot y WhatsApp
+        // ✅ FUNCIÓN SIMPLIFICADA: Solo cambia la apariencia
         function switchChatMode(useWhatsApp = false) {
-            CHATBOT_CONFIG.enabled = !useWhatsApp;
             const chatButton = document.querySelector('.chat-button');
             
-            if (useWhatsApp) {
-                chatButton.title = 'Abrir WhatsApp';
+            if (useWhatsApp || !CHATBOT_CONFIG.configUrl) {
+                chatButton.title = 'Contactar por WhatsApp';
                 chatButton.innerHTML = '📱';
             } else {
                 chatButton.title = 'Abrir Chat';
@@ -1242,39 +1214,28 @@
             });
         });
 
-        // Precargar y probar el chatbot después de que la página se cargue
+        // ✅ CARGA CORREGIDA: Sin apertura automática de WhatsApp
         window.addEventListener('load', function() {
-            // Probar conectividad primero
-            testChatbotConnection();
+            // Configurar apariencia inicial del botón (como WhatsApp)
+            switchChatMode(true);
             
-            // Precargar chatbot después de 3 segundos
-            setTimeout(() => {
-                if (CHATBOT_CONFIG.enabled) {
-                    loadChatbot();
-                }
-            }, 3000);
+            // Solo log informativo, no abre nada automáticamente
+            console.log('ℹ️ Página cargada. Botón configurado para WhatsApp.');
         });
 
-        // Manejar errores de JavaScript
-        window.addEventListener('error', function(e) {
-            console.log('Error capturado:', e.error);
-            // Si el error está relacionado con el chatbot, deshabilitar
-            if (e.error && e.error.message && e.error.message.includes('Landbot')) {
-                console.warn('Error relacionado con Landbot, deshabilitando chatbot');
-                CHATBOT_CONFIG.enabled = false;
-                switchChatMode(true);
+        // Función para administradores (usar en consola)
+        window.enableChatbot = function(configUrl) {
+            if (configUrl) {
+                CHATBOT_CONFIG.configUrl = configUrl;
+                CHATBOT_CONFIG.enabled = true;
+                switchChatMode(false);
+                console.log('✅ Chatbot habilitado con URL:', configUrl);
+            } else {
+                console.log('❌ Necesitas proporcionar una URL: enableChatbot("tu-url-aqui")');
             }
-        });
-
-        // Función para administradores: cambiar modo de chat
-        // Usar en consola: toggleChatMode()
-        window.toggleChatMode = function() {
-            CHATBOT_CONFIG.enabled = !CHATBOT_CONFIG.enabled;
-            switchChatMode(!CHATBOT_CONFIG.enabled);
-            console.log(`Modo de chat: ${CHATBOT_CONFIG.enabled ? 'Chatbot' : 'WhatsApp'}`);
         };
     </script>
 </body>
-</html>>📧 Email:</strong> iagdpasesoria@gmail.com</p>
+</html>
                     <p><strong>📱 WhatsApp:</strong> +57 304 292 3988</p>
-                    <p><strong
+                </div>
